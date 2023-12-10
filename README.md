@@ -1,2 +1,2 @@
 # ClickSnap
-A java-based desktop program develop by me &amp; dan
+A java-based desktop program develop by me &amp; danz
