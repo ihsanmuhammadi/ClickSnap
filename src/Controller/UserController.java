@@ -8,6 +8,8 @@ import DB.KoneksiDB;
 import Model.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import martmain.Login;
@@ -69,6 +71,8 @@ public class UserController {
                             JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
                 }
                 st.execute(sql);
+                
+                showLoginPanel();
             }
 
         } catch (Exception e) {
@@ -76,38 +80,38 @@ public class UserController {
         }
     }
     
-    public void Login() {
-        usrm = new User();
-        usrm.setEmail(lgn.getEmail().getText());
-        usrm.setPassword(lgn.getPass().getText());
-        
-        String sql = "SELECT * FROM users where email = ? AND password = ?";
-        
-        try (PreparedStatement st = conn.prepareStatement(sql)) {
-            if ("".equals(regist.getNama().getText())) {
-                JOptionPane.showMessageDialog(new JFrame(), "Name is require", "Error",
-                        JOptionPane.ERROR_MESSAGE);
-            } else if ("".equals(regist.getPass().getText())) {
-                JOptionPane.showMessageDialog(new JFrame(), "Password is require", "Error",
-                        JOptionPane.ERROR_MESSAGE);
-            } else {
-                st.setString(1, usrm.getEmail());
-                st.setString(2, usrm.getPassword());
+    public void login() {
+    usrm = new User();
+    usrm.setEmail(lgn.getEmail().getText());
+    usrm.setPassword(lgn.getPass().getText());
+
+    String sql = "SELECT * FROM users WHERE email = ? AND password = ?";
+
+    try (PreparedStatement st = conn.prepareStatement(sql)) {
+        if ("".equals(lgn.getEmail().getText()) || "".equals(lgn.getPass().getText())) {
+            JOptionPane.showMessageDialog(new JFrame(), "Email and password are required", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+        } else {
+            st.setString(1, usrm.getEmail());
+            st.setString(2, usrm.getPassword());
+
+            ResultSet resultSet = st.executeQuery();
+            if (resultSet.next()) {
+                JOptionPane.showConfirmDialog(lgn, "Berhasil Login.", "Info",
+                        JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
                 
-                int rowsInserted = st.executeUpdate();
-                if (rowsInserted > 0) {
-                    JOptionPane.showConfirmDialog(regist, "Berhasil Login.", "Info",
-                            JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
-                } else {
-                    JOptionPane.showConfirmDialog(regist, "Incorrect email or password.", "Error",
-                            JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
-                }
-                st.execute(sql);
+                // Assuming showUserpanel() is a method that handles the user panel display
+                showUserpanel();
+            } else {
+                JOptionPane.showConfirmDialog(lgn, "Incorrect email or password.", "Error",
+                        JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
             }
-    } catch (Exception e) {
-            System.out.println("Error!" + e.getMessage());
         }
+    } catch (SQLException e) {
+        System.out.println("Error!" + e.getMessage());
     }
+}
+
     
     public void showUserpanel() {
         UserPanel up = new UserPanel();

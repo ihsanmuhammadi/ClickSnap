@@ -232,7 +232,6 @@ public class SignUp extends javax.swing.JFrame {
 
     private void RegisterBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterBtActionPerformed
         ctrlUsr.regist();
-        ctrlUsr.showLoginPanel();
     }//GEN-LAST:event_RegisterBtActionPerformed
 
     private void LoginBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginBtActionPerformed

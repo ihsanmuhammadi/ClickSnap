@@ -201,8 +201,7 @@ public class Login extends javax.swing.JFrame {
 
     private void LoginBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginBtActionPerformed
         // TODO add your handling code here:
-        ctrlUsr.Login();
-        ctrlUsr.showUserpanel();
+        ctrlUsr.login();
     }//GEN-LAST:event_LoginBtActionPerformed
 
     private void RegisterBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterBtActionPerformed
