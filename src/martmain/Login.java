@@ -200,16 +200,11 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void LoginBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginBtActionPerformed
-        // TODO add your handling code here:
         ctrlUsr.login();
     }//GEN-LAST:event_LoginBtActionPerformed
 
     private void RegisterBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterBtActionPerformed
-        SignUp LamanRegister = new SignUp();
-        LamanRegister.setVisible(true);
-        LamanRegister.pack();
-        LamanRegister.setLocationRelativeTo(null);
-        this.dispose();
+        ctrlUsr.showRegistPanel();
     }//GEN-LAST:event_RegisterBtActionPerformed
 
     /**

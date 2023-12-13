@@ -15,7 +15,6 @@ import javax.swing.JTextField;
  */
 public class SignUp extends javax.swing.JFrame {
     private UserController ctrlUsr;
-//    private Login ctrlLgn;
     
     public SignUp() {
         initComponents();
@@ -28,11 +27,9 @@ public class SignUp extends javax.swing.JFrame {
     public JTextField getEmail() {
         return emailField;
     }
-    
     public JTextField getPass() {
         return passwordField;
     }
-    
     public JTextField getNo() {
         return noHpField;
     }
@@ -235,10 +232,7 @@ public class SignUp extends javax.swing.JFrame {
     }//GEN-LAST:event_RegisterBtActionPerformed
 
     private void LoginBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginBtActionPerformed
-        Login LamanLogin = new Login();
-        LamanLogin.setVisible(true);
-        LamanLogin.pack();
-        LamanLogin.setLocationRelativeTo(null);
+        ctrlUsr.showLoginPanel();
     }//GEN-LAST:event_LoginBtActionPerformed
 
     /**
