@@ -14,6 +14,10 @@ public class User {
     public User() {
         
     }
+    
+//    public User(String current_user) {
+//        this.name = current_user;
+//    }
 
     public String getName() {
         return name;
