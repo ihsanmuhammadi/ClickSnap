@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import martmain.AdminPanel;
 import martmain.Login;
 import martmain.SignUp;
+import martmain.Transaksi;
 import martmain.UserPanel;
 
 /**
@@ -26,13 +27,17 @@ public class UserController {
     private Login lgn;
     private User usrm;
     private Connection conn;
+    private User currentUser;
+    private Transaksi trx;
 
-    public UserController(SignUp regist, Login lgn) {
+    public UserController(SignUp regist, Login lgn, Transaksi trx) {
         this.regist = regist;
         this.lgn = lgn;
+        this.trx = trx;
         KoneksiDB koneksiDB = new KoneksiDB();
         koneksiDB.bukaKoneksi();
         this.conn = koneksiDB.getConn();
+        setCurrentUser(currentUser);
     }
 
     public void regist() {
@@ -192,4 +197,20 @@ public class UserController {
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
         return email.matches(emailRegex);
     }
+
+    private void setCurrentUser(User currentUser) {
+       this.currentUser = currentUser;
+    }
+    
+    public int getCurrentUserId() {
+        // Contoh implementasi: mengembalikan ID pengguna yang diambil dari objek User saat ini
+        if (currentUser != null) {
+            return currentUser.getId(); // Ubah sesuai dengan implementasi objek User Anda
+        } else {
+            // Handle jika pengguna tidak ada atau tidak masuk
+            JOptionPane.showMessageDialog(null, "Pengguna belum masuk.", "Error", JOptionPane.ERROR_MESSAGE);
+            return -1; // Nilai -1 mungkin digunakan untuk menunjukkan bahwa tidak ada pengguna yang masuk
+        }
+    }
+    
 }

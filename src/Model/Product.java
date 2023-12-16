@@ -9,7 +9,7 @@ package Model;
  * @author achma
  */
 public class Product {
-//    private int id;
+    private int id;
     private String nama;
     private int stok, harga;
     private String detail;
@@ -48,6 +48,16 @@ public class Product {
 
     public String getDetail() {
         return detail;
+    }
+    
+    @Override
+    public String toString() {
+        // Override toString untuk menampilkan nama saat ditampilkan di JComboBox
+        return nama;
+    }
+
+    public int getId() {
+        return id;
     }
 
 }

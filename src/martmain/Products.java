@@ -20,7 +20,7 @@ public class Products extends javax.swing.JFrame {
     
     public Products() {
         initComponents();
-        ctrl = new ProductController(this);
+        ctrl = new ProductController(this, null);
         ctrl.tampilkan_data();
     }
 

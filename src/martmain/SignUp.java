@@ -18,7 +18,7 @@ public class SignUp extends javax.swing.JFrame {
     
     public SignUp() {
         initComponents();
-        ctrlUsr = new UserController(this, null);
+        ctrlUsr = new UserController(this, null, null);
     }
     
     public JTextField getNama() {

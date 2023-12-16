@@ -4,6 +4,7 @@
  */
 package martmain;
 
+import Controller.TransactionController;
 import java.awt.Cursor;
 import javax.swing.JOptionPane;
 
@@ -13,11 +14,13 @@ import javax.swing.JOptionPane;
  */
 public class UserPanel extends javax.swing.JFrame {
 
+    private TransactionController txCtrl;
     /**
      * Creates new form AdminPanel
      */
     public UserPanel() {
         initComponents();
+        txCtrl = new TransactionController(null, this);
     }
 
     /**
@@ -342,7 +345,7 @@ public class UserPanel extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void purchaseBtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_purchaseBtMouseClicked
-        JOptionPane.showMessageDialog(this, "Next menu is still in progress.", "Notification", JOptionPane.INFORMATION_MESSAGE);
+        txCtrl.showTxPanel();
     }//GEN-LAST:event_purchaseBtMouseClicked
 
     private void purchaseBtMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_purchaseBtMouseEntered

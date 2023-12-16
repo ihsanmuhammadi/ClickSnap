@@ -7,12 +7,16 @@ package Controller;
 import DB.KoneksiDB;
 import Model.Product;
 import Model.User;
+import java.awt.List;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import martmain.Products;
+import martmain.Transaksi;
 
 /**
  *
@@ -22,10 +26,11 @@ public class ProductController {
     private Products prdkf;
     private Product prdkm;
     private Connection connection;
+    protected final ArrayList<Product> products = new ArrayList<>();
 //    private User currentUser;
     
     
-    public ProductController(Products prdkf) {
+    public ProductController(Products prdkf, Transaksi trx) {
         this.prdkf = prdkf;
         KoneksiDB koneksiDB = new KoneksiDB();
         koneksiDB.bukaKoneksi();
@@ -102,9 +107,9 @@ public class ProductController {
         int deletedRows = statement.executeUpdate();
 
         if (deletedRows > 0) {
-            JOptionPane.showMessageDialog(prdkf, "Data berhasil dihapus", "Success", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(prdkf, "Produk berhasil dihapus", "Success", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(prdkf, "Data tidak ditemukan", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(prdkf, "Produk tidak ditemukan", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
         statement.close();
@@ -147,6 +152,75 @@ public class ProductController {
         System.out.println("Error : " + e.getMessage());
     }
 }
+    
+    
+    public ArrayList<Product> getAllProducts() throws SQLException {
+    // Query SQL untuk mengambil semua produk
+    String sql = "SELECT * FROM product";
+
+    try (java.sql.Statement stm = connection.createStatement();
+         ResultSet resultSet = stm.executeQuery(sql)) {
+        // Iterasi hasil query dan tambahkan produk ke list
+        while (resultSet.next()) {
+            Product product = new Product();
+            product.setNama(resultSet.getString("nama"));
+            product.setStok(resultSet.getInt("stok"));
+            product.setHarga(resultSet.getInt("harga"));
+            product.setDetail(resultSet.getString("detail"));
+
+            products.add(product);
+        }
+
+        return products;
+    } catch (SQLException e) {
+        e.printStackTrace();
+        // Lebih baik lempar exception kembali ke lapisan yang lebih tinggi
+        throw e;
+    }
+}
+    
+    // Metode untuk mendapatkan produk berdasarkan nama
+    public Product getProductByName(String name) {
+    for (Product product : products) {
+        if (product.getNama().equals(name)) {
+            return product;
+        }
+    }
+    return null; // Produk tidak ditemukan
+}
+
+
+    
+//    public Product getProductByName(String name) {
+//    // Query SQL untuk mengambil produk berdasarkan nama
+//    String sql = "SELECT * FROM product WHERE nama = ?";
+//
+//    try (PreparedStatement statement = connection.prepareStatement(sql)) {
+//        statement.setString(1, name);
+//
+//        try (ResultSet resultSet = statement.executeQuery()) {
+//            // Jika ada hasil dari query, ambil produk
+//            if (resultSet.next()) {
+//                Product product = new Product();
+//                product.setNama(resultSet.getString("nama"));
+//                product.setStok(resultSet.getInt("stok"));
+//                product.setHarga(resultSet.getInt("harga"));
+//                product.setDetail(resultSet.getString("detail"));
+//
+//                return product;
+//            }
+//        }
+//    } catch (SQLException e) {
+//        e.printStackTrace();
+//        // Handle exception jika terjadi kesalahan saat mengambil data dari database
+//    }
+//
+//    // Return null jika produk tidak ditemukan atau terjadi kesalahan
+//    return null;
+//}
+
+
+
 
 //    private void setCurrentUser(User currentUser) {
 //        this.currentUser = currentUser;

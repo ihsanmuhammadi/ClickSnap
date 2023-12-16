@@ -18,7 +18,7 @@ public class Login extends javax.swing.JFrame {
     
     public Login() {
         initComponents();
-        ctrlUsr = new UserController(null, this);
+        ctrlUsr = new UserController(null, this, null);
     }
 
     public JTextField getEmail() {

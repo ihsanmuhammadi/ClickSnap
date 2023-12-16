@@ -9,6 +9,11 @@ package Model;
  * @author achma
  */
 public class User {
+    private int Id;
+
+    public int getId() {
+        return Id;
+    }
     private String name, email, password, noHp;
     
     public User() {
@@ -18,6 +23,10 @@ public class User {
 //    public User(String current_user) {
 //        this.name = current_user;
 //    }
+    
+    public User(int current_user) {
+        this.Id = current_user;
+    }
 
     public String getName() {
         return name;
