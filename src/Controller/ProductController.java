@@ -38,37 +38,47 @@ public class ProductController {
 //        setCurrentUser(currentUser);
     }
     
-    public void simpan() {
-        prdkm = new Product();
-        prdkm.setNama(prdkf.getNama().getText());
-        prdkm.setStok(Integer.parseInt(prdkf.getStok().getText()));
-        prdkm.setHarga(Integer.parseInt(prdkf.getHarga().getText()));
-        prdkm.setDetail(prdkf.getDetail().getText());
-
-        String sql = "INSERT INTO product (nama, stok, harga, detail) VALUES (?, ?, ?, ?)";
-
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString(1, prdkm.getNama());
-            statement.setInt(2, prdkm.getStok());
-            statement.setInt(3, prdkm.getHarga());
-            statement.setString(4, prdkm.getDetail());
-
-            int rowsInserted = statement.executeUpdate();
-            if (rowsInserted > 0) {
-                JOptionPane.showConfirmDialog(prdkf, "Produk berhasil ditambahkan.", "Info", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                JOptionPane.showConfirmDialog(prdkf, "Gagal menambahkan produk.", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            JOptionPane.showConfirmDialog(prdkf, "Terjadi kesalahan: " + e.getMessage(), "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
-        }
-    }
-    
-    public void edit() {
+public void simpan() {
     prdkm = new Product();
     prdkm.setNama(prdkf.getNama().getText());
-    prdkm.setStok(Integer.parseInt(prdkf.getStok().getText()));
+
+    // Mengonversi stok berdasarkan item yang dipilih
+    String stokString = (String) prdkf.getStok().getSelectedItem();
+    int stokValue = "Tersedia".equals(stokString) ? 1 : 0;
+    prdkm.setStok(stokValue);
+
+    prdkm.setHarga(Integer.parseInt(prdkf.getHarga().getText()));
+    prdkm.setDetail(prdkf.getDetail().getText());
+
+    String sql = "INSERT INTO product (nama, stok, harga, detail) VALUES (?, ?, ?, ?)";
+
+    try (PreparedStatement statement = connection.prepareStatement(sql)) {
+        statement.setString(1, prdkm.getNama());
+        statement.setInt(2, prdkm.getStok());
+        statement.setInt(3, prdkm.getHarga());
+        statement.setString(4, prdkm.getDetail());
+
+        int rowsInserted = statement.executeUpdate();
+        if (rowsInserted > 0) {
+            JOptionPane.showConfirmDialog(prdkf, "Produk berhasil ditambahkan.", "Info", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showConfirmDialog(prdkf, "Gagal menambahkan produk.", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+        JOptionPane.showConfirmDialog(prdkf, "Terjadi kesalahan: " + e.getMessage(), "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
+    }
+}
+
+public void edit() {
+    prdkm = new Product();
+    prdkm.setNama(prdkf.getNama().getText());
+
+    // Mengonversi stok berdasarkan item yang dipilih
+    String stokString = (String) prdkf.getStok().getSelectedItem();
+    int stokValue = "Tersedia".equals(stokString) ? 1 : 0;
+    prdkm.setStok(stokValue);
+
     prdkm.setHarga(Integer.parseInt(prdkf.getHarga().getText()));
     prdkm.setDetail(prdkf.getDetail().getText());
 
@@ -94,8 +104,7 @@ public class ProductController {
 }
 
 
-    
-    public void deleteProduct() {
+public void deleteProduct() {
         prdkm = new Product();
         prdkm.setNama(prdkf.getNama().getText());
         
@@ -130,19 +139,31 @@ public class ProductController {
     model.addColumn("Stok");
     model.addColumn("Price");
     model.addColumn("Detail");
-    
+
     try {
         int no = 1;
         String sql = "SELECT * FROM product";
         java.sql.Statement stm = connection.createStatement();
         java.sql.ResultSet res = stm.executeQuery(sql);
-        
+
         while (res.next()) {
             // Sesuaikan kolom yang sesuai dengan tabel database Anda
+            String stokString;
+            int stok = res.getInt("stok");
+
+            // Konversi nilai stok ke string "Kosong" atau "Tersedia"
+            if (stok == 0) {
+                stokString = "Kosong";
+            } else if (stok == 1) {
+                stokString = "Tersedia";
+            } else {
+                stokString = "Undefined";  // Sesuaikan dengan kebutuhan Anda jika ada nilai stok lainnya
+            }
+
             model.addRow(new Object[]{
                 no++,
                 res.getString("nama"),
-                res.getInt("stok"),
+                stokString,
                 res.getInt("harga"),
                 res.getString("detail")
             });
@@ -152,32 +173,7 @@ public class ProductController {
         System.out.println("Error : " + e.getMessage());
     }
 }
-    
-    
-    public ArrayList<Product> getAllProducts() throws SQLException {
-    // Query SQL untuk mengambil semua produk
-    String sql = "SELECT * FROM product";
 
-    try (java.sql.Statement stm = connection.createStatement();
-         ResultSet resultSet = stm.executeQuery(sql)) {
-        // Iterasi hasil query dan tambahkan produk ke list
-        while (resultSet.next()) {
-            Product product = new Product();
-            product.setNama(resultSet.getString("nama"));
-            product.setStok(resultSet.getInt("stok"));
-            product.setHarga(resultSet.getInt("harga"));
-            product.setDetail(resultSet.getString("detail"));
-
-            products.add(product);
-        }
-
-        return products;
-    } catch (SQLException e) {
-        e.printStackTrace();
-        // Lebih baik lempar exception kembali ke lapisan yang lebih tinggi
-        throw e;
-    }
-}
     
     // Metode untuk mendapatkan produk berdasarkan nama
     public Product getProductByName(String name) {

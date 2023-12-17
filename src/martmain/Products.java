@@ -6,8 +6,10 @@ package martmain;
 
 import Controller.ProductController;
 import java.awt.Cursor;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 /**
@@ -28,23 +30,22 @@ public class Products extends javax.swing.JFrame {
         return nameField;
     }
     
-    public JTextField getStok() {
-        return stokField;
-    }
+    public JComboBox getStok() {
+    return cbAvail; // Langsung mengembalikan JComboBox
+}
     
     public JTextField getHarga() {
         return hargaField;
     }
     
-    public JTextField getDetail() {
-        return detailField;
+    public JTextArea getDetail() {
+        return detailTxt;
     }
     
     public JTable getTable() {
         return tableProduct;
     }
-    
-//    public javax.swing.JTable tableProduct;
+   
     
     
     @SuppressWarnings("unchecked")
@@ -75,8 +76,8 @@ public class Products extends javax.swing.JFrame {
         btnDelete = new javax.swing.JButton();
         btnEdit = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        detailTxt = new javax.swing.JTextArea();
+        cbAvail = new javax.swing.JComboBox<>();
         jLabel13 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableProduct = new javax.swing.JTable();
@@ -199,14 +200,14 @@ public class Products extends javax.swing.JFrame {
             }
         });
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        detailTxt.setColumns(20);
+        detailTxt.setRows(5);
+        jScrollPane2.setViewportView(detailTxt);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tersedia", "Tidak tersedia" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        cbAvail.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tersedia", "Kosong" }));
+        cbAvail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                cbAvailActionPerformed(evt);
             }
         });
 
@@ -249,7 +250,7 @@ public class Products extends javax.swing.JFrame {
                                         .addComponent(jLabel13)
                                         .addGap(27, 27, 27)
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(cbAvail, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE))))))
                         .addGap(1, 1, 1)))
                 .addGap(0, 52, Short.MAX_VALUE))
@@ -276,7 +277,7 @@ public class Products extends javax.swing.JFrame {
                         .addComponent(jLabel12)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                    .addComponent(cbAvail, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
                     .addComponent(jLabel13))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -389,18 +390,18 @@ public class Products extends javax.swing.JFrame {
 
     // Mengisi nilai ke dalam field pada form
     nameField.setText(name);
-    stokField.setText(stok);
+    cbAvail.setSelectedItem(this);
     hargaField.setText(harga);
-    detailField.setText(detail);
+    detailTxt.setText(detail);
     }//GEN-LAST:event_tableProductMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void cbAvailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAvailActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_cbAvailActionPerformed
 
     /**
      * @param args the command line arguments
@@ -445,9 +446,10 @@ public class Products extends javax.swing.JFrame {
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnSimpan;
+    private javax.swing.JComboBox<String> cbAvail;
+    private javax.swing.JTextArea detailTxt;
     private javax.swing.JTextField hargaField;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -473,9 +475,19 @@ public class Products extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField nameField;
     private javax.swing.JTable tableProduct;
     // End of variables declaration//GEN-END:variables
 }
+
+
+
+//    public JTextField getDetail() {
+//        return detailField;
+//    }
+//    
+    
+    //    public JTextField getStok() {
+//        return stokField;
+//    }
