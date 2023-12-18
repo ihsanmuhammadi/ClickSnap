@@ -5,11 +5,15 @@
 package Controller;
 
 import DB.KoneksiDB;
+import Model.Admin;
+import Model.Customer;
+import Model.Product;
 import Model.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import martmain.AdminPanel;
@@ -29,6 +33,8 @@ public class UserController {
     private Connection conn;
     private User currentUser;
     private Transaksi trx;
+    
+    protected final ArrayList<User> userList = new ArrayList<>();
 
     public UserController(SignUp regist, Login lgn, Transaksi trx) {
         this.regist = regist;
@@ -37,15 +43,20 @@ public class UserController {
         KoneksiDB koneksiDB = new KoneksiDB();
         koneksiDB.bukaKoneksi();
         this.conn = koneksiDB.getConn();
-        setCurrentUser(currentUser);
+//        setCurrentUser(currentUser);
+    }
+    
+    public void addUser(User user) {
+        userList.add(user);
     }
 
     public void regist() {
-        usrm = new User();
-        usrm.setName(regist.getNama().getText());
-        usrm.setEmail(regist.getEmail().getText());
-        usrm.setPassword(regist.getPass().getText());
-        usrm.setNoHp(regist.getNo().getText());
+        usrm = new User(
+            regist.getNama().getText(),
+            regist.getEmail().getText(),
+            regist.getPass().getText(),
+            regist.getNo().getText()
+        );
         
         // Validate email format
         if (!isValidEmail(usrm.getEmail())) {
@@ -108,46 +119,67 @@ public class UserController {
     }
     
     public void login() {
-        usrm = new User();
-        usrm.setEmail(lgn.getEmail().getText());
-        usrm.setPassword(lgn.getPass().getText());
+    usrm = new User(
+        null,
+        lgn.getEmail().getText(),
+        lgn.getPass().getText(),
+        null
+    );
 
-        String sql = "SELECT * FROM users WHERE email = ? AND password = ?";
+    String sql = "SELECT * FROM users WHERE email = ? AND password = ?";
 
-        try (PreparedStatement st = conn.prepareStatement(sql)) {
-            if ("".equals(lgn.getEmail().getText()) || "".equals(lgn.getPass().getText())) {
-                JOptionPane.showMessageDialog(new JFrame(), "Email and password are required", "Error",
-                    JOptionPane.ERROR_MESSAGE);
-            } else {
-                st.setString(1, usrm.getEmail());
-                st.setString(2, usrm.getPassword());
+    try (PreparedStatement st = conn.prepareStatement(sql)) {
+        if ("".equals(lgn.getEmail().getText()) || "".equals(lgn.getPass().getText())) {
+            JOptionPane.showMessageDialog(new JFrame(), "Email and password are required", "Error",
+                JOptionPane.ERROR_MESSAGE);
+        } else {
+            st.setString(1, usrm.getEmail());
+            st.setString(2, usrm.getPassword());
 
-                ResultSet resultSet = st.executeQuery();
-                if (resultSet.next()) {
-                    String role = resultSet.getString("role");
+            ResultSet resultSet = st.executeQuery();
+            if (resultSet.next()) {
+                String role = resultSet.getString("role");
 
-                    if ("admin".equals(role)) {
-                        JOptionPane.showConfirmDialog(lgn, "Login successful as Admin.", "Info",
-                            JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
-                        showAdminPanel();
-                    } else if ("user".equals(role)) {
-                        JOptionPane.showConfirmDialog(lgn, "Login successful.", "Info",
-                            JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
-                        showUserPanel();
-                    } else {
-                        JOptionPane.showConfirmDialog(lgn, "Invalid role.", "Error",
-                            JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
-                    }
+                if ("admin".equals(role)) {
+                    JOptionPane.showConfirmDialog(lgn, "Login successful as Admin.", "Info",
+                        JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
+                    currentUser = new Admin(
+                        resultSet.getInt("id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("email"),
+                        resultSet.getString("password"),
+                        resultSet.getString("noHp")
+                    );
+                    showAdminPanel();
+                } else if ("user".equals(role)) {
+                    JOptionPane.showConfirmDialog(lgn, "Login successful.", "Info",
+                        JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
+                    currentUser = new Customer(
+                        resultSet.getInt("id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("email"),
+                        resultSet.getString("password"),
+                        resultSet.getString("noHp")
+                    );
+                    
+                    // Di dalam metode login() setelah pengisian currentUser
+                    JOptionPane.showMessageDialog(new JFrame(), "Current User ID: " + currentUser.getId() + "\nCurrent User Name: " + currentUser.getName(), "Info", JOptionPane.INFORMATION_MESSAGE);
+
+                    showUserPanel();
                 } else {
-                    JOptionPane.showConfirmDialog(lgn, "Incorrect email or password.", "Error",
+                    JOptionPane.showConfirmDialog(lgn, "Invalid role.", "Error",
                         JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
                 }
+            } else {
+                JOptionPane.showConfirmDialog(lgn, "Incorrect email or password.", "Error",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
             }
-        } catch (SQLException e) {
-            System.out.println("Error!" + e.getMessage());
         }
-    
+    } catch (SQLException e) {
+        System.out.println("Error!" + e.getMessage());
     }
+}
+
     
     public void showUserPanel() {
         UserPanel up = new UserPanel();
@@ -198,19 +230,19 @@ public class UserController {
         return email.matches(emailRegex);
     }
 
-    private void setCurrentUser(User currentUser) {
-       this.currentUser = currentUser;
+    public User getCurrentUser() {
+        return currentUser;
     }
     
-    public int getCurrentUserId() {
-        // Contoh implementasi: mengembalikan ID pengguna yang diambil dari objek User saat ini
-        if (currentUser != null) {
-            return currentUser.getId(); // Ubah sesuai dengan implementasi objek User Anda
-        } else {
-            // Handle jika pengguna tidak ada atau tidak masuk
-            JOptionPane.showMessageDialog(null, "Pengguna belum masuk.", "Error", JOptionPane.ERROR_MESSAGE);
-            return -1; // Nilai -1 mungkin digunakan untuk menunjukkan bahwa tidak ada pengguna yang masuk
-        }
-    }
+//    public int getCurrentUserId() {
+//        // Contoh implementasi: mengembalikan ID pengguna yang diambil dari objek User saat ini
+//        if (currentUser != null) {
+//            return currentUser.getId(); // Ubah sesuai dengan implementasi objek User Anda
+//        } else {
+//            // Handle jika pengguna tidak ada atau tidak masuk
+//            JOptionPane.showMessageDialog(null, "Pengguna belum masuk.", "Error", JOptionPane.ERROR_MESSAGE);
+//            return -1; // Nilai -1 mungkin digunakan untuk menunjukkan bahwa tidak ada pengguna yang masuk
+//        }
+//    }
     
 }

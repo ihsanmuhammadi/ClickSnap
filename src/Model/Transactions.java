@@ -18,8 +18,20 @@ public class Transactions {
     private int jumlahBeli;
     private int totalHarga;
 
+    
     // Getter dan setter
+    
+    public Transactions() {
+        
+    }
 
+    public Transactions(int userId, int productId, int jumlahBeli, int totalHarga) {
+        this.userId = userId;
+        this.productId = productId;
+        this.jumlahBeli = jumlahBeli;
+        this.totalHarga = totalHarga;
+    }
+    
     public int getId() {
         return id;
     }
