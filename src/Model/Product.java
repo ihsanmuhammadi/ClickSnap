@@ -14,25 +14,32 @@ public class Product {
     private int stok, harga;
     private String detail;
     
-    public Product(){
-        
-    }
+//    public Product(){
+//        
+//    }
 
-    public void setNama(String nama) {
+    public Product(String nama, int stok, int harga, String detail) {
         this.nama = nama;
-    }
-
-    public void setStok(int stok) {
         this.stok = stok;
-    }
-
-    public void setHarga(int harga) {
         this.harga = harga;
-    }
-
-    public void setDetail(String detail) {
         this.detail = detail;
     }
+
+//    public void setNama(String nama) {
+//        this.nama = nama;
+//    }
+//
+//    public void setStok(int stok) {
+//        this.stok = stok;
+//    }
+//
+//    public void setHarga(int harga) {
+//        this.harga = harga;
+//    }
+//
+//    public void setDetail(String detail) {
+//        this.detail = detail;
+//    }
 
     public String getNama() {
         return nama;

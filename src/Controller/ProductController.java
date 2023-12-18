@@ -39,20 +39,18 @@ public class ProductController {
     }
     
 public void simpan() {
-    prdkm = new Product();
-    prdkm.setNama(prdkf.getNama().getText());
-
-    // Mengonversi stok berdasarkan item yang dipilih
-    String stokString = (String) prdkf.getStok().getSelectedItem();
-    int stokValue = "Tersedia".equals(stokString) ? 1 : 0;
-    prdkm.setStok(stokValue);
-
-    prdkm.setHarga(Integer.parseInt(prdkf.getHarga().getText()));
-    prdkm.setDetail(prdkf.getDetail().getText());
+    // Menggunakan konstruktor dengan parameter
+    prdkm = new Product(
+        prdkf.getNama().getText(),
+        "Tersedia".equals(prdkf.getStok().getSelectedItem()) ? 1 : 0,
+        Integer.parseInt(prdkf.getHarga().getText()),
+        prdkf.getDetail().getText()
+    );
 
     String sql = "INSERT INTO product (nama, stok, harga, detail) VALUES (?, ?, ?, ?)";
 
     try (PreparedStatement statement = connection.prepareStatement(sql)) {
+        // Menggunakan getter dari objek prdkm
         statement.setString(1, prdkm.getNama());
         statement.setInt(2, prdkm.getStok());
         statement.setInt(3, prdkm.getHarga());
@@ -61,6 +59,7 @@ public void simpan() {
         int rowsInserted = statement.executeUpdate();
         if (rowsInserted > 0) {
             JOptionPane.showConfirmDialog(prdkf, "Produk berhasil ditambahkan.", "Info", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
+            tampilkan_data();
         } else {
             JOptionPane.showConfirmDialog(prdkf, "Gagal menambahkan produk.", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
         }
@@ -70,21 +69,20 @@ public void simpan() {
     }
 }
 
+
 public void edit() {
-    prdkm = new Product();
-    prdkm.setNama(prdkf.getNama().getText());
-
-    // Mengonversi stok berdasarkan item yang dipilih
-    String stokString = (String) prdkf.getStok().getSelectedItem();
-    int stokValue = "Tersedia".equals(stokString) ? 1 : 0;
-    prdkm.setStok(stokValue);
-
-    prdkm.setHarga(Integer.parseInt(prdkf.getHarga().getText()));
-    prdkm.setDetail(prdkf.getDetail().getText());
+    // Menggunakan konstruktor dengan parameter
+    prdkm = new Product(
+        prdkf.getNama().getText(),
+        "Tersedia".equals(prdkf.getStok().getSelectedItem()) ? 1 : 0,
+        Integer.parseInt(prdkf.getHarga().getText()),
+        prdkf.getDetail().getText()
+    );
 
     String sql = "UPDATE product SET stok=?, harga=?, detail=? WHERE nama=?";
 
     try (PreparedStatement statement = connection.prepareStatement(sql)) {
+        // Menggunakan getter dari objek prdkm
         statement.setInt(1, prdkm.getStok());
         statement.setInt(2, prdkm.getHarga());
         statement.setString(3, prdkm.getDetail());
@@ -104,32 +102,33 @@ public void edit() {
 }
 
 
-public void deleteProduct() {
-        prdkm = new Product();
-        prdkm.setNama(prdkf.getNama().getText());
-        
+
+public void delete() {
+    // Menggunakan konstruktor dengan parameter
+    prdkm = new Product(prdkf.getNama().getText(), 0, 0, null);
+
     try {
         String query = "DELETE FROM product WHERE nama = ?";
-        PreparedStatement statement = connection.prepareStatement(query);
-        statement.setString(1, prdkm.getNama());
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, prdkm.getNama());
 
-        int deletedRows = statement.executeUpdate();
+            int deletedRows = statement.executeUpdate();
 
-        if (deletedRows > 0) {
-            JOptionPane.showMessageDialog(prdkf, "Produk berhasil dihapus", "Success", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(prdkf, "Produk tidak ditemukan", "Error", JOptionPane.ERROR_MESSAGE);
+            if (deletedRows > 0) {
+                JOptionPane.showMessageDialog(prdkf, "Produk berhasil dihapus", "Success", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(prdkf, "Produk tidak ditemukan", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+            // Refresh data di tabel setelah menghapus
+            tampilkan_data();
         }
-
-        statement.close();
-
-        // Refresh data di tabel setelah menghapus
-        tampilkan_data();
     } catch (SQLException e) {
         e.printStackTrace();
         JOptionPane.showMessageDialog(prdkf, "Error saat menghapus data dari database", "Error", JOptionPane.ERROR_MESSAGE);
     }
 }
+
 
     
     public void tampilkan_data() {
@@ -194,12 +193,12 @@ public ArrayList getAllAvailableProducts() throws SQLException {
 
         // Iterasi hasil query dan tambahkan produk ke list
         while (resultSet.next()) {
-            Product product = new Product();
-            product.setNama(resultSet.getString("nama"));
-            product.setStok(resultSet.getInt("stok"));
-            product.setHarga(resultSet.getInt("harga"));
-            product.setDetail(resultSet.getString("detail"));
-
+            Product product = new Product(
+                resultSet.getString("nama"),
+                resultSet.getInt("stok"),
+                resultSet.getInt("harga"),
+                resultSet.getString("detail")
+            );
             products.add(product);
         }
 
