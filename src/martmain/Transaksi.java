@@ -32,7 +32,7 @@ public class Transaksi extends javax.swing.JFrame {
         
 //        get nama ke combobox
         try {
-            products = prdkCtrl.getAllProducts();
+            products = prdkCtrl.getAllAvailableProducts();
             for (Product product : products) {
                 cbProduk.addItem(product.getNama());
             }

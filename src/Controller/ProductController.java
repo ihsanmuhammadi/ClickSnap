@@ -185,6 +185,32 @@ public void deleteProduct() {
     return null; // Produk tidak ditemukan
 }
 
+public ArrayList getAllAvailableProducts() throws SQLException {
+    // Query SQL untuk mengambil semua produk dengan stok = 1 (tersedia)
+    String sql = "SELECT * FROM product WHERE stok = 1";
+
+    try (java.sql.Statement stm = connection.createStatement();
+         ResultSet resultSet = stm.executeQuery(sql)) {
+
+        // Iterasi hasil query dan tambahkan produk ke list
+        while (resultSet.next()) {
+            Product product = new Product();
+            product.setNama(resultSet.getString("nama"));
+            product.setStok(resultSet.getInt("stok"));
+            product.setHarga(resultSet.getInt("harga"));
+            product.setDetail(resultSet.getString("detail"));
+
+            products.add(product);
+        }
+
+        return products;
+    } catch (SQLException e) {
+        e.printStackTrace();
+        // Lebih baik lempar exception kembali ke lapisan yang lebih tinggi
+        throw e;
+    }
+}
+
 
     
 //    public Product getProductByName(String name) {
