@@ -24,9 +24,9 @@ public class User {
         this.noHp = noHp;
     }
     
-//    public User(String current_user) {
-//        this.name = current_user;
-//    }
+    public User(String current_user) {
+            this.name = current_user;
+        }
     
     public User(int current_user) {
         this.Id = current_user;

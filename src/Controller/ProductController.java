@@ -30,13 +30,19 @@ public class ProductController {
 //    private User currentUser;
     
     
-    public ProductController(Products prdkf, Transaksi trx) {
+    public ProductController(Products prdkf) {
         this.prdkf = prdkf;
         KoneksiDB koneksiDB = new KoneksiDB();
         koneksiDB.bukaKoneksi();
         this.connection = koneksiDB.getConn();
 //        setCurrentUser(currentUser);
     }
+    
+ public void reset() {
+    prdkf.getNama().setText("");
+    prdkf.getHarga().setText("");
+    prdkf.getDetail().setText("");
+ }
     
 public void simpan() {
     // Menggunakan konstruktor dengan parameter
@@ -201,13 +207,13 @@ public ArrayList getAllAvailableProducts() throws SQLException {
             );
             products.add(product);
         }
-
         return products;
     } catch (SQLException e) {
         e.printStackTrace();
         // Lebih baik lempar exception kembali ke lapisan yang lebih tinggi
         throw e;
     }
+    
 }
 
 

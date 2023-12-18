@@ -35,6 +35,7 @@ public class UserController {
     private Transaksi trx;
     
     protected final ArrayList<User> userList = new ArrayList<>();
+   
 
     public UserController(SignUp regist, Login lgn, Transaksi trx) {
         this.regist = regist;
@@ -43,6 +44,7 @@ public class UserController {
         KoneksiDB koneksiDB = new KoneksiDB();
         koneksiDB.bukaKoneksi();
         this.conn = koneksiDB.getConn();
+        setCurrentUser(currentUser);
 //        setCurrentUser(currentUser);
     }
     
@@ -150,6 +152,7 @@ public class UserController {
                         resultSet.getString("password"),
                         resultSet.getString("noHp")
                     );
+                    addUser(currentUser);
                     showAdminPanel();
                 } else if ("user".equals(role)) {
                     JOptionPane.showConfirmDialog(lgn, "Login successful.", "Info",
@@ -161,6 +164,7 @@ public class UserController {
                         resultSet.getString("password"),
                         resultSet.getString("noHp")
                     );
+                    addUser(currentUser);
                     
                     // Di dalam metode login() setelah pengisian currentUser
                     JOptionPane.showMessageDialog(new JFrame(), "Current User ID: " + currentUser.getId() + "\nCurrent User Name: " + currentUser.getName(), "Info", JOptionPane.INFORMATION_MESSAGE);
@@ -230,19 +234,36 @@ public class UserController {
         return email.matches(emailRegex);
     }
 
+    
+//    public void setCurrentUser(Customer currentUser) {
+//        this.currentUser = currentUser;
+//    }
+//    
+//    public Customer getCurrentUser() {
+//        return (Customer) currentUser;
+//    }
+   
+
+
+    
+    public int getCurrentUserId() {
+        // Contoh implementasi: mengembalikan ID pengguna yang diambil dari objek User saat ini
+        if (currentUser != null) {
+            return currentUser.getId(); // Ubah sesuai dengan implementasi objek User Anda
+        } else {
+            // Handle jika pengguna tidak ada atau tidak masuk
+            JOptionPane.showMessageDialog(null, "Pengguna belum masuk.", "Error", JOptionPane.ERROR_MESSAGE);
+            return -1; // Nilai -1 mungkin digunakan untuk menunjukkan bahwa tidak ada pengguna yang masuk
+        }
+    }
+
     public User getCurrentUser() {
         return currentUser;
     }
+
+    private void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
+    }
     
-//    public int getCurrentUserId() {
-//        // Contoh implementasi: mengembalikan ID pengguna yang diambil dari objek User saat ini
-//        if (currentUser != null) {
-//            return currentUser.getId(); // Ubah sesuai dengan implementasi objek User Anda
-//        } else {
-//            // Handle jika pengguna tidak ada atau tidak masuk
-//            JOptionPane.showMessageDialog(null, "Pengguna belum masuk.", "Error", JOptionPane.ERROR_MESSAGE);
-//            return -1; // Nilai -1 mungkin digunakan untuk menunjukkan bahwa tidak ada pengguna yang masuk
-//        }
-//    }
     
 }
