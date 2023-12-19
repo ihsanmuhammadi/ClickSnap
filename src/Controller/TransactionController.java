@@ -56,8 +56,8 @@ public class TransactionController {
         // Gantilah nilai parameter pada konstruktor sesuai dengan urutan yang benar
         trxm = new Transactions(userId, productId, jumlahBeli, totalHarga);
 
-//        String sql = "INSERT INTO transactions (userId, productId, jumlahBeli, totalHarga) VALUES (?, ?, ?, ?)";
-        String sql = "INSERT INTO transak (user_id, product_id, jumlah_beli, total_harga) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO transactions (userId, productId, jumlahBeli, totalHarga) VALUES (?, ?, ?, ?)";
+//        String sql = "INSERT INTO transak (user_id, product_id, jumlah_beli, total_harga) VALUES (?, ?, ?, ?)";
         
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             // Sesuaikan dengan tipe data yang sesuai
@@ -81,6 +81,44 @@ public class TransactionController {
         ex.printStackTrace();
     }
 }
+    
+//    public void saveTransaction() {
+//    try {
+//        int userId = 0;
+//        int productId = Integer.parseInt(trxf.getId().getText());
+//        int jumlahBeli = Integer.parseInt(trxf.getJml().getText());
+//        int totalHarga = Integer.parseInt(trxf.getTotal().getText());
+//        
+//        // Gantilah nilai parameter pada konstruktor sesuai dengan urutan yang benar
+//        trxm = new Transactions(userId, productId, jumlahBeli, totalHarga);
+//
+//        String sql = "INSERT INTO transactions (userId, productId, jumlahBeli, totalHarga) VALUES (?, ?, ?, ?)";
+////        String sql = "INSERT INTO transak (user_id, product_id, jumlah_beli, total_harga) VALUES (?, ?, ?, ?)";
+//        
+//        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+//            // Sesuaikan dengan tipe data yang sesuai
+////            statement.setInt(1, trxm.getId());
+////            statement.setInt(2, trxm.getProductId());
+//            statement.setLong(1, trxm.getId());
+//            statement.setLong(2, trxm.getProductId());
+//            statement.setInt(3, trxm.getJumlahBeli());
+//            statement.setInt(4, trxm.getTotalHarga());
+//
+//            int rowsInserted = statement.executeUpdate();
+//            if (rowsInserted > 0) {
+//                JOptionPane.showMessageDialog(null, "Transaksi berhasil disimpan.", "Info", JOptionPane.INFORMATION_MESSAGE);
+//            } else {
+//                JOptionPane.showMessageDialog(null, "Gagal menyimpan transaksi.", "Error", JOptionPane.ERROR_MESSAGE);
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//            JOptionPane.showMessageDialog(null, "Terjadi kesalahan: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+//        }
+//    } catch (NumberFormatException ex) {
+//        // Tangani kesalahan konversi tipe data di sini jika diperlukan
+//        ex.printStackTrace();
+//    }
+//}
 
     
     public void showTxPanel() {
