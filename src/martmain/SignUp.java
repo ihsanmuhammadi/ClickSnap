@@ -91,9 +91,10 @@ public class SignUp extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("SansSerif", 0, 13)); // NOI18N
         jLabel4.setText("Password");
 
+        emailField.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         emailField.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
 
-        passwordField.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        passwordField.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         passwordField.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
 
         RegisterBt.setBackground(new java.awt.Color(0, 0, 0));
@@ -120,11 +121,14 @@ public class SignUp extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("SansSerif", 0, 13)); // NOI18N
         jLabel6.setText("Name");
 
+        nameField.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         nameField.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
 
         jLabel9.setFont(new java.awt.Font("SansSerif", 0, 13)); // NOI18N
         jLabel9.setText("Whatsapp Number");
 
+        noHpField.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        noHpField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         noHpField.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -139,7 +143,7 @@ public class SignUp extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(110, 110, 110)
                         .addComponent(jLabel7)))
-                .addGap(0, 120, Short.MAX_VALUE))
+                .addGap(0, 101, Short.MAX_VALUE))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(170, 170, 170)
                 .addComponent(jLabel1)

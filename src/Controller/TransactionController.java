@@ -27,25 +27,25 @@ public class TransactionController {
     private Transactions trxm;
     private Connection connection;
     private UserPanel up;
-    public Customer currentUser;
+//    public Customer currentUser;
     
     public TransactionController(Purchase prc, UserPanel up) {
         this.prc = prc;
         KoneksiDB koneksiDB = new KoneksiDB();
         koneksiDB.bukaKoneksi();
         this.connection = koneksiDB.getConn();
-        setCurrentUser(currentUser);
+//        setCurrentUser(currentUser);
     }
 
     
-    public Customer getCurrentUser() {
-        return currentUser;
-    }
+//    public Customer getCurrentUser() {
+//        return currentUser;
+//    }
 
     // Method untuk mengatur pengguna yang sedang login
-    public void setCurrentUser(Customer currentUser) {
-        this.currentUser = currentUser;
-    }
+//    public void setCurrentUser(Customer currentUser) {
+//        this.currentUser = currentUser;
+//    }
     
     public void saveTransaction() {
     try {
@@ -62,7 +62,7 @@ public class TransactionController {
         
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             // Sesuaikan dengan tipe data yang sesuai
-            statement.setInt(1, prc.currentUser.getId());
+            statement.setInt(1, prc.currentUser.getid());
             statement.setInt(2, trxm.getProductId());
             statement.setInt(3, trxm.getJumlahBeli());
             statement.setInt(4, trxm.getTotalHarga());

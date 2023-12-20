@@ -5,7 +5,7 @@
 package martmain;
 
 import Controller.UserController;
-import Model.User;
+import Model.Customer;
 import java.awt.Cursor;
 import javax.swing.JOptionPane;
 
@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
  */
 public class UserPanel extends javax.swing.JFrame {
 
-    public User currentUser;
+    public Customer currentUser;
     private UserController txCtrl;
     /**
      * Creates new form AdminPanel
@@ -25,7 +25,7 @@ public class UserPanel extends javax.swing.JFrame {
         txCtrl = new UserController(null, null, this);
     }
     
-    public UserPanel(User currentUser) {
+    public UserPanel(Customer currentUser) {
         this.currentUser = currentUser;
         initComponents();
         txCtrl = new UserController(null, null, this);

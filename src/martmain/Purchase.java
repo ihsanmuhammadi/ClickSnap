@@ -10,7 +10,6 @@ import DB.KoneksiDB;
 import Model.Customer;
 import Model.Product;
 import Model.Transactions;
-import Model.User;
 import java.awt.List;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -28,14 +27,14 @@ import javax.swing.table.DefaultTableModel;
  * @author ihsanmiqbal
  */
 public class Purchase extends javax.swing.JFrame {
-    public User currentUser;
+    public Customer currentUser;
     private TransactionController trx;
     /**
      * Creates new form Purchase
      */
     public Purchase() {
          initComponents();
-//        labelId.setVisible(false);
+        labelId.setVisible(false);
         trx = new TransactionController(this, null);
         KoneksiDB koneksiDB = new KoneksiDB();
         koneksiDB.bukaKoneksi();
@@ -43,7 +42,7 @@ public class Purchase extends javax.swing.JFrame {
         trx.tampilkan_data();
     }
     
-    public Purchase(User currentUser) {
+    public Purchase(Customer currentUser) {
         this.currentUser = currentUser;
          initComponents();
         labelId.setVisible(false);
@@ -267,17 +266,15 @@ public class Purchase extends javax.swing.JFrame {
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(harga, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
                                     .addComponent(jumlahField)))
-                            .addComponent(labelId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(71, 71, 71)
+                                .addComponent(jLabel4))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(labelId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnSimpan, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(82, 82, 82)))))
                 .addGap(23, 31, Short.MAX_VALUE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(104, 104, 104)
-                        .addComponent(btnSimpan, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(94, 94, 94)
-                        .addComponent(jLabel4)))
-                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -847,6 +844,7 @@ public class Purchase extends javax.swing.JFrame {
     int totalInt = total.intValue();
     
     totalField.setText(String.valueOf(totalInt));
+//    totalField1.setText(String.valueOf(currentUser.geti
     }//GEN-LAST:event_jumlahFieldKeyReleased
 
     /**

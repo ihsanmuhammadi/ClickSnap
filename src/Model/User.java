@@ -8,29 +8,22 @@ package Model;
  *
  * @author achma
  */
-public class User {
-    private int Id;
-
-    public int getId() {
-        return Id;
-    }
+abstract class User {
+    private int id;
+    protected String name, email, password, noHp;
     
-    private String name, email, password, noHp;
-    
-     public User(String name, String email, String password, String noHp) {
+     public User(int id, String name, String email, String password, String noHp) {
+        this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
         this.noHp = noHp;
     }
     
-    public User(String current_user) {
-            this.name = current_user;
+    public User(String currentUser) {
+            this.name = currentUser;
         }
     
-    public User(int current_user) {
-        this.Id = current_user;
-    }
 
 //    public User(int aInt, String string, String string0, String string1, String string2, String admin) {
 //        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -38,6 +31,10 @@ public class User {
 
     public String getName() {
         return name;
+    }
+    
+    public int getid() {
+        return id;
     }
 
 //    public void setName(String name) {
@@ -67,4 +64,6 @@ public class User {
     public String getNoHp() {
         return noHp;
     }
+    
+    public abstract String getRole();
 }

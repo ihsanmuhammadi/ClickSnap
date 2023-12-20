@@ -11,30 +11,24 @@ package Model;
 // Customer.java (kelas anak)
 public class Customer extends User {
     private String role;
-    private final int id;
     private String alamat;
 
     // Konstruktor
     public Customer(int id, String name, String email, String password, String noHp) {
-        super(name, email, password, noHp);
-        this.role = "customer";
-        this.id = id;
+        super(id, name, email, password, noHp);
+    }
+    
+    public Customer(String name) {
+        super(name);
+        this.name = name;
     }
 
-    // Getter dan setter untuk atribut role
+
+    // Metode lain yang spesifik untuk Customer (jika
+
+    @Override
     public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    // Metode lain yang spesifik untuk Customer (jika ada)
-    // ...
-
-    public int getId() {
-        return id;
+        return "user";
     }
 }
 

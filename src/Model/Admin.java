@@ -11,25 +11,21 @@ package Model;
 // Admin.java (kelas anak)
 public class Admin extends User {
     private String role;
-    private final int id;
 
     // Konstruktor
     public Admin(int id, String name, String email, String password, String noHp) {
-        super(name, email, password, noHp);
-        this.role = "admin";
-        this.id = id;
+        super(id, name, email, password, noHp);
+    }
+    
+    public Admin(String name) {
+        super(name);
+        this.name = name;
     }
 
-    // Getter dan setter untuk atribut role
+    @Override
     public String getRole() {
-        return role;
+        return "admin";
     }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    // Metode lain yang spesifik untuk Admin (jika ada)
-    // ...
+    
 }
 

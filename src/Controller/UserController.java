@@ -8,7 +8,7 @@ import DB.KoneksiDB;
 import Model.Admin;
 import Model.Customer;
 import Model.Product;
-import Model.User;
+import Model.Customer;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -30,12 +30,12 @@ import martmain.UserPanel;
 public class UserController {
     private SignUp regist;
     private Login lgn;
-    private User usrm;
+    private Customer usrm;
     private Connection conn;
-    private User currentUser;
+    private Customer currentUser;
     private UserPanel up;
     
-    protected final ArrayList<User> userList = new ArrayList<>();
+    protected final ArrayList<Customer> userList = new ArrayList<>();
    
 
     public UserController(SignUp regist, Login lgn, UserPanel up) {
@@ -45,16 +45,17 @@ public class UserController {
         KoneksiDB koneksiDB = new KoneksiDB();
         koneksiDB.bukaKoneksi();
         this.conn = koneksiDB.getConn();
-        setCurrentUser(currentUser);
+//        setCurrentUser(currentUser);
 //        setCurrentUser(currentUser);
     }
     
-    public void addUser(User user) {
+    public void addUser(Customer user) {
         userList.add(user);
     }
 
     public void regist() {
-        usrm = new User(
+        usrm = new Customer(
+            0,
             regist.getNama().getText(),
             regist.getEmail().getText(),
             regist.getPass().getText(),
@@ -122,7 +123,8 @@ public class UserController {
     }
     
     public void login() {
-    usrm = new User(
+    usrm = new Customer(
+        0,
         null,
         lgn.getEmail().getText(),
         lgn.getPass().getText(),
@@ -146,19 +148,19 @@ public class UserController {
                 if ("admin".equals(role)) {
                     JOptionPane.showConfirmDialog(lgn, "Login successful as Admin.", "Info",
                         JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
-                    currentUser = new Admin(
+                    Admin currentUser = new Admin(
                         resultSet.getInt("id"),
                         resultSet.getString("name"),
                         resultSet.getString("email"),
                         resultSet.getString("password"),
                         resultSet.getString("noHp")
                     );
-                    addUser(currentUser);
+//                    addUser(currentUser);
                     showAdminPanel();
                 } else if ("user".equals(role)) {
                     JOptionPane.showConfirmDialog(lgn, "Login successful.", "Info",
                         JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
-                    currentUser = new Customer(
+                    Customer currentUser = new Customer(
                         resultSet.getInt("id"),
                         resultSet.getString("name"),
                         resultSet.getString("email"),
@@ -170,7 +172,7 @@ public class UserController {
 //                    Purchase prc = new Purchase(currentUser);
                     
                     // Di dalam metode login() setelah pengisian currentUser
-                    JOptionPane.showMessageDialog(new JFrame(), "Current User ID: " + currentUser.getId() + "\nCurrent User Name: " + currentUser.getName(), "Info", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(new JFrame(), "Current User ID: " + currentUser.getid() + "\nCurrent User Name: " + currentUser.getName(), "Info", JOptionPane.INFORMATION_MESSAGE);
 
                     showUserPanel(currentUser);
                     
@@ -188,15 +190,16 @@ public class UserController {
     }
 }
     
-     public void showTxPanel(User currentUser) {
+     public void showTxPanel(Customer currentUser) {
         Purchase tx = new Purchase(currentUser);
-            tx.setVisible(true);
+        tx.setVisible(true);
         tx.pack();
         tx.setLocationRelativeTo(null);
+//        JOptionPane.showMessageDialog(new JFrame(), "Current User ID: " + currentUser.getid() + "\nCurrent User Name: " + currentUser.getName(), "Info", JOptionPane.INFORMATION_MESSAGE);
     }
 
     
-    public void showUserPanel(User currentUser) {
+    public void showUserPanel(Customer currentUser) {
         UserPanel up = new UserPanel(currentUser);
         up.setVisible(true);
         up.pack();
@@ -256,25 +259,25 @@ public class UserController {
    
 
 
-    
-    public int getCurrentUserId() {
-        // Contoh implementasi: mengembalikan ID pengguna yang diambil dari objek User saat ini
-        if (currentUser != null) {
-            return currentUser.getId(); // Ubah sesuai dengan implementasi objek User Anda
-        } else {
-            // Handle jika pengguna tidak ada atau tidak masuk
-            JOptionPane.showMessageDialog(null, "Pengguna belum masuk.", "Error", JOptionPane.ERROR_MESSAGE);
-            return -1; // Nilai -1 mungkin digunakan untuk menunjukkan bahwa tidak ada pengguna yang masuk
-        }
-    }
-
-    public User getCurrentUser() {
-        return currentUser;
-    }
-
-    private void setCurrentUser(User currentUser) {
-        this.currentUser = currentUser;
-    }
+//    
+//    public int getCurrentUserId() {
+//        // Contoh implementasi: mengembalikan ID pengguna yang diambil dari objek User saat ini
+//        if (currentUser != null) {
+//            return currentUser.getid(); // Ubah sesuai dengan implementasi objek User Anda
+//        } else {
+//            // Handle jika pengguna tidak ada atau tidak masuk
+//            JOptionPane.showMessageDialog(null, "Pengguna belum masuk.", "Error", JOptionPane.ERROR_MESSAGE);
+//            return -1; // Nilai -1 mungkin digunakan untuk menunjukkan bahwa tidak ada pengguna yang masuk
+//        }
+//    }
+//
+//    public User getCurrentUser() {
+//        return currentUser;
+//    }
+//
+//    private void setCurrentUser(User currentUser) {
+//        this.currentUser = currentUser;
+//    }
     
     
 }
