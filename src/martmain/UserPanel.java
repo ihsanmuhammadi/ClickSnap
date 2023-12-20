@@ -4,7 +4,8 @@
  */
 package martmain;
 
-import Controller.TransactionController;
+import Controller.UserController;
+import Model.User;
 import java.awt.Cursor;
 import javax.swing.JOptionPane;
 
@@ -14,15 +15,22 @@ import javax.swing.JOptionPane;
  */
 public class UserPanel extends javax.swing.JFrame {
 
-    private TransactionController txCtrl;
+    public User currentUser;
+    private UserController txCtrl;
     /**
      * Creates new form AdminPanel
      */
     public UserPanel() {
         initComponents();
-        txCtrl = new TransactionController(null, this);
+        txCtrl = new UserController(null, null, this);
     }
-
+    
+    public UserPanel(User currentUser) {
+        this.currentUser = currentUser;
+        initComponents();
+        txCtrl = new UserController(null, null, this);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -345,7 +353,7 @@ public class UserPanel extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void purchaseBtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_purchaseBtMouseClicked
-        txCtrl.showTxPanel();
+        txCtrl.showTxPanel(currentUser);
     }//GEN-LAST:event_purchaseBtMouseClicked
 
     private void purchaseBtMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_purchaseBtMouseEntered

@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import martmain.Purchase;
 import martmain.Transaksi;
 import martmain.UserPanel;
 
@@ -22,14 +23,14 @@ import martmain.UserPanel;
  * @author achma
  */
 public class TransactionController {
-    private Transaksi trxf;
+    private Purchase prc;
     private Transactions trxm;
     private Connection connection;
     private UserPanel up;
     public Customer currentUser;
     
-    public TransactionController(Transaksi trxf, UserPanel up) {
-        this.trxf = trxf;
+    public TransactionController(Purchase prc, UserPanel up) {
+        this.prc = prc;
         KoneksiDB koneksiDB = new KoneksiDB();
         koneksiDB.bukaKoneksi();
         this.connection = koneksiDB.getConn();
@@ -49,9 +50,9 @@ public class TransactionController {
     public void saveTransaction() {
     try {
         int userId = 0;
-        int productId = Integer.parseInt(trxf.getId().getText());
-        int jumlahBeli = Integer.parseInt(trxf.getJml().getText());
-        int totalHarga = Integer.parseInt(trxf.getTotal().getText());
+        int productId = Integer.parseInt(prc.getId().getText());
+        int jumlahBeli = Integer.parseInt(prc.getJml().getText());
+        int totalHarga = Integer.parseInt(prc.getTotal().getText());
         
         // Gantilah nilai parameter pada konstruktor sesuai dengan urutan yang benar
         trxm = new Transactions(userId, productId, jumlahBeli, totalHarga);
@@ -61,7 +62,7 @@ public class TransactionController {
         
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             // Sesuaikan dengan tipe data yang sesuai
-            statement.setInt(1, trxm.getId());
+            statement.setInt(1, prc.currentUser.getId());
             statement.setInt(2, trxm.getProductId());
             statement.setInt(3, trxm.getJumlahBeli());
             statement.setInt(4, trxm.getTotalHarga());
@@ -85,9 +86,9 @@ public class TransactionController {
 //    public void saveTransaction() {
 //    try {
 //        int userId = 0;
-//        int productId = Integer.parseInt(trxf.getId().getText());
-//        int jumlahBeli = Integer.parseInt(trxf.getJml().getText());
-//        int totalHarga = Integer.parseInt(trxf.getTotal().getText());
+//        int productId = Integer.parseInt(prc.getId().getText());
+//        int jumlahBeli = Integer.parseInt(prc.getJml().getText());
+//        int totalHarga = Integer.parseInt(prc.getTotal().getText());
 //        
 //        // Gantilah nilai parameter pada konstruktor sesuai dengan urutan yang benar
 //        trxm = new Transactions(userId, productId, jumlahBeli, totalHarga);
@@ -121,12 +122,12 @@ public class TransactionController {
 //}
 
     
-    public void showTxPanel() {
-        Transaksi tx = new Transaksi();
-        tx.setVisible(true);
-        tx.pack();
-        tx.setLocationRelativeTo(null);
-    }
+//    public void showTxPanel() {
+//        Transaksi tx = new Transaksi();
+//        tx.setVisible(true);
+//        tx.pack();
+//        tx.setLocationRelativeTo(null);
+//    }
     
     
     public void tampilkan_data() {
@@ -147,7 +148,7 @@ public class TransactionController {
                 obj[3] = res.getString("detail");
                 model_prdk.addRow(obj);
 
-                trxf.getCb().addItem((String) obj[0]);
+                prc.getCb().addItem((String) obj[0]);
         }
     } catch (SQLException e) {
         System.out.println("Error : " + e.getMessage());
@@ -156,7 +157,7 @@ public class TransactionController {
     
     
     public void isiHargaDANid(){
-        String sql = "SELECT * FROM product WHERE nama = '"+trxf.getCb().getSelectedItem()+"'";
+        String sql = "SELECT * FROM product WHERE nama = '"+prc.getCb().getSelectedItem()+"'";
 //        "select * from product where nama='"+cbProduk.getSelectedItem()+"'"
         
         try {
@@ -166,10 +167,10 @@ public class TransactionController {
         if(rs.next()) {
             int productId = rs.getInt("id");
             // Menggunakan labelId (sesuaikan dengan komponen yang sesuai)
-            trxf.getId().setText(String.valueOf(productId));
+            prc.getId().setText(String.valueOf(productId));
             
             String hrg = rs.getString("harga");
-            trxf.getHarga().setText(hrg);
+            prc.getHarga().setText(hrg);
         }
         } catch (Exception e) {
         }
@@ -178,14 +179,14 @@ public class TransactionController {
     
     public void setTotal() {
     try {
-        Double harga_prdk = Double.parseDouble(trxf.getHarga().getText());
-        Double jml_beli = Double.parseDouble(trxf.getJml().getText());
+        Double harga_prdk = Double.parseDouble(prc.getHarga().getText());
+        Double jml_beli = Double.parseDouble(prc.getJml().getText());
         Double total = harga_prdk * jml_beli;
 
         // Mengonversi nilai total menjadi int
         int totalInt = total.intValue();
 
-        trxf.getTotal().setText(String.valueOf(totalInt));
+        prc.getTotal().setText(String.valueOf(totalInt));
     } catch (NumberFormatException e) {
         // Handle exception, misalnya dengan menampilkan pesan kesalahan kepada pengguna.
         e.printStackTrace(); // Hanya untuk tujuan demonstrasi, sebaiknya di-handle secara lebih baik.
@@ -196,4 +197,4 @@ public class TransactionController {
 
 
 //    private void setCurrentUser(Customer currentUser) {
-//        this.currentUser = trxf.getcu;}
+//        this.currentUser = prc.getcu;}

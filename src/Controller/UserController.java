@@ -18,6 +18,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import martmain.AdminPanel;
 import martmain.Login;
+import martmain.Purchase;
 import martmain.SignUp;
 import martmain.Transaksi;
 import martmain.UserPanel;
@@ -32,15 +33,15 @@ public class UserController {
     private User usrm;
     private Connection conn;
     private User currentUser;
-    private Transaksi trx;
+    private UserPanel up;
     
     protected final ArrayList<User> userList = new ArrayList<>();
    
 
-    public UserController(SignUp regist, Login lgn, Transaksi trx) {
+    public UserController(SignUp regist, Login lgn, UserPanel up) {
         this.regist = regist;
         this.lgn = lgn;
-        this.trx = trx;
+        this.up = up;
         KoneksiDB koneksiDB = new KoneksiDB();
         koneksiDB.bukaKoneksi();
         this.conn = koneksiDB.getConn();
@@ -166,10 +167,13 @@ public class UserController {
                     );
                     addUser(currentUser);
                     
+//                    Purchase prc = new Purchase(currentUser);
+                    
                     // Di dalam metode login() setelah pengisian currentUser
                     JOptionPane.showMessageDialog(new JFrame(), "Current User ID: " + currentUser.getId() + "\nCurrent User Name: " + currentUser.getName(), "Info", JOptionPane.INFORMATION_MESSAGE);
 
-                    showUserPanel();
+                    showUserPanel(currentUser);
+                    
                 } else {
                     JOptionPane.showConfirmDialog(lgn, "Invalid role.", "Error",
                         JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
@@ -183,10 +187,17 @@ public class UserController {
         System.out.println("Error!" + e.getMessage());
     }
 }
+    
+     public void showTxPanel(User currentUser) {
+        Purchase tx = new Purchase(currentUser);
+            tx.setVisible(true);
+        tx.pack();
+        tx.setLocationRelativeTo(null);
+    }
 
     
-    public void showUserPanel() {
-        UserPanel up = new UserPanel();
+    public void showUserPanel(User currentUser) {
+        UserPanel up = new UserPanel(currentUser);
         up.setVisible(true);
         up.pack();
         up.setLocationRelativeTo(null);

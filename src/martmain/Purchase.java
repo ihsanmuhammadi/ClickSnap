@@ -3,7 +3,24 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package martmain;
-
+import Controller.ProductController;
+import Controller.TransactionController;
+import Controller.UserController;
+import DB.KoneksiDB;
+import Model.Customer;
+import Model.Product;
+import Model.Transactions;
+import Model.User;
+import java.awt.List;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 
 /**
@@ -11,12 +28,48 @@ package martmain;
  * @author ihsanmiqbal
  */
 public class Purchase extends javax.swing.JFrame {
-
+    public User currentUser;
+    private TransactionController trx;
     /**
      * Creates new form Purchase
      */
     public Purchase() {
-        initComponents();
+         initComponents();
+//        labelId.setVisible(false);
+        trx = new TransactionController(this, null);
+        KoneksiDB koneksiDB = new KoneksiDB();
+        koneksiDB.bukaKoneksi();
+        koneksiDB.getConn();
+        trx.tampilkan_data();
+    }
+    
+    public Purchase(User currentUser) {
+        this.currentUser = currentUser;
+         initComponents();
+        labelId.setVisible(false);
+        trx = new TransactionController(this, null);
+        KoneksiDB koneksiDB = new KoneksiDB();
+        koneksiDB.bukaKoneksi();
+        koneksiDB.getConn();
+        trx.tampilkan_data();
+    }
+    
+    public JTextField getId() {
+        return labelId;
+    }
+    public JTextField getJml() {
+        return totalField;
+    }
+    public JTextField getTotal() {
+        return totalField;
+    }
+    
+    public JComboBox getCb() {
+        return cbProduk;
+    }
+    
+    public JTextField getHarga() {
+        return harga;
     }
 
     /**
@@ -33,17 +86,17 @@ public class Purchase extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jumlahField = new javax.swing.JTextField();
+        totalField = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         btnSimpan = new javax.swing.JButton();
         cbProduk = new javax.swing.JComboBox<>();
-        jumlahField3 = new javax.swing.JTextField();
-        jumlahField4 = new javax.swing.JTextField();
+        harga = new javax.swing.JTextField();
+        jumlahField = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel37 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        labelId = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
@@ -121,11 +174,11 @@ public class Purchase extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jumlahField.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        jumlahField.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
-        jumlahField.addActionListener(new java.awt.event.ActionListener() {
+        totalField.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        totalField.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
+        totalField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jumlahFieldActionPerformed(evt);
+                totalFieldActionPerformed(evt);
             }
         });
 
@@ -143,21 +196,32 @@ public class Purchase extends javax.swing.JFrame {
             }
         });
 
+        cbProduk.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose your product" }));
         cbProduk.setPreferredSize(new java.awt.Dimension(64, 23));
-
-        jumlahField3.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        jumlahField3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
-        jumlahField3.addActionListener(new java.awt.event.ActionListener() {
+        cbProduk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jumlahField3ActionPerformed(evt);
+                cbProdukActionPerformed(evt);
             }
         });
 
-        jumlahField4.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        jumlahField4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
-        jumlahField4.addActionListener(new java.awt.event.ActionListener() {
+        harga.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        harga.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
+        harga.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jumlahField4ActionPerformed(evt);
+                hargaActionPerformed(evt);
+            }
+        });
+
+        jumlahField.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        jumlahField.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
+        jumlahField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jumlahFieldActionPerformed(evt);
+            }
+        });
+        jumlahField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jumlahFieldKeyReleased(evt);
             }
         });
 
@@ -170,10 +234,10 @@ public class Purchase extends javax.swing.JFrame {
         jLabel37.setFont(new java.awt.Font("SansSerif", 0, 13)); // NOI18N
         jLabel37.setText("Total");
 
-        jTextField1.setText("id prdk");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        labelId.setText("id prdk");
+        labelId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                labelIdActionPerformed(evt);
             }
         });
 
@@ -196,14 +260,14 @@ public class Purchase extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel37)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                                .addComponent(jumlahField, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(totalField, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel22)
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jumlahField3, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
-                                    .addComponent(jumlahField4)))
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(harga, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
+                                    .addComponent(jumlahField)))
+                            .addComponent(labelId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(23, 31, Short.MAX_VALUE))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -226,20 +290,20 @@ public class Purchase extends javax.swing.JFrame {
                     .addComponent(jLabel8))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jumlahField3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(harga, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jumlahField4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jumlahField, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel22))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jumlahField, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(totalField, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel37))
                 .addGap(26, 26, 26)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSimpan, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(labelId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
@@ -317,7 +381,7 @@ public class Purchase extends javax.swing.JFrame {
         jPanel9.setPreferredSize(new java.awt.Dimension(210, 210));
 
         jLabel6.setBackground(new java.awt.Color(255, 51, 51));
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/register350.png"))); // NOI18N
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Hawa_s_MART-removebg-preview-3.png"))); // NOI18N
 
         jLabel7.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         jLabel7.setText("Frisian Flag Kental Manis");
@@ -411,6 +475,8 @@ public class Purchase extends javax.swing.JFrame {
 
         jPanel11.setBackground(new java.awt.Color(255, 255, 255));
         jPanel11.setPreferredSize(new java.awt.Dimension(210, 210));
+
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Bag.png"))); // NOI18N
 
         jLabel12.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         jLabel12.setText("  Masako Ayam");
@@ -744,29 +810,44 @@ public class Purchase extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jumlahFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jumlahFieldActionPerformed
+    private void totalFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_totalFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jumlahFieldActionPerformed
+    }//GEN-LAST:event_totalFieldActionPerformed
 
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
-     
+        trx.saveTransaction();
     }//GEN-LAST:event_btnSimpanActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jumlahField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jumlahField3ActionPerformed
+    private void hargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hargaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jumlahField3ActionPerformed
+    }//GEN-LAST:event_hargaActionPerformed
 
-    private void jumlahField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jumlahField4ActionPerformed
+    private void jumlahFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jumlahFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jumlahField4ActionPerformed
+    }//GEN-LAST:event_jumlahFieldActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void labelIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_labelIdActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_labelIdActionPerformed
+
+    private void cbProdukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbProdukActionPerformed
+        trx.isiHargaDANid();
+    }//GEN-LAST:event_cbProdukActionPerformed
+
+    private void jumlahFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jumlahFieldKeyReleased
+    Double harga_prdk = Double.parseDouble(harga.getText());
+    Double jml_beli = Double.parseDouble(jumlahField.getText());
+    Double total = harga_prdk * jml_beli;
+    
+    // Mengonversi nilai total menjadi int
+    int totalInt = total.intValue();
+    
+    totalField.setText(String.valueOf(totalInt));
+    }//GEN-LAST:event_jumlahFieldKeyReleased
 
     /**
      * @param args the command line arguments
@@ -809,6 +890,7 @@ public class Purchase extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSimpan;
     private javax.swing.JComboBox<String> cbProduk;
+    private javax.swing.JTextField harga;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -861,9 +943,8 @@ public class Purchase extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jumlahField;
-    private javax.swing.JTextField jumlahField3;
-    private javax.swing.JTextField jumlahField4;
+    private javax.swing.JTextField labelId;
+    private javax.swing.JTextField totalField;
     // End of variables declaration//GEN-END:variables
 }
