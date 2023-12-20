@@ -10,7 +10,6 @@ package Model;
  */
 // Admin.java (kelas anak)
 public class Admin extends User {
-    private String role;
 
     // Konstruktor
     public Admin(int id, String name, String email, String password, String noHp) {
@@ -22,10 +21,10 @@ public class Admin extends User {
         this.name = name;
     }
 
-    @Override
-    public String getRole() {
-        return "admin";
-    }
+//     @Override
+//    public String getRole(String role) {
+//        return "admin";
+//    }
     
 }
 

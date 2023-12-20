@@ -19,8 +19,8 @@ import javax.swing.JOptionPane;
 import martmain.AdminPanel;
 import martmain.Login;
 import martmain.Purchase;
+import martmain.Riwayat;
 import martmain.SignUp;
-import martmain.Transaksi;
 import martmain.UserPanel;
 
 /**
@@ -143,6 +143,7 @@ public class UserController {
 
             ResultSet resultSet = st.executeQuery();
             if (resultSet.next()) {
+//                String role = resultSet.getString("role");
                 String role = resultSet.getString("role");
 
                 if ("admin".equals(role)) {
@@ -172,7 +173,7 @@ public class UserController {
 //                    Purchase prc = new Purchase(currentUser);
                     
                     // Di dalam metode login() setelah pengisian currentUser
-                    JOptionPane.showMessageDialog(new JFrame(), "Current User ID: " + currentUser.getid() + "\nCurrent User Name: " + currentUser.getName(), "Info", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(new JFrame(), "Current User ID: " + currentUser.getId() + "\nCurrent User Name: " + currentUser.getName(), "Info", JOptionPane.INFORMATION_MESSAGE);
 
                     showUserPanel(currentUser);
                     
@@ -204,6 +205,13 @@ public class UserController {
         up.setVisible(true);
         up.pack();
         up.setLocationRelativeTo(null);
+    }
+    
+    public void riwayat(Customer currentUser) {
+    Riwayat rw = new Riwayat(currentUser);
+    rw.setVisible(true);
+    rw.pack();
+    rw.setLocationRelativeTo(null);
     }
     
     public void showAdminPanel() {

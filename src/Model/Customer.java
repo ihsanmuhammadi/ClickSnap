@@ -10,7 +10,7 @@ package Model;
  */
 // Customer.java (kelas anak)
 public class Customer extends User {
-    private String role;
+//    private String role;
     private String alamat;
 
     // Konstruktor
@@ -26,9 +26,16 @@ public class Customer extends User {
 
     // Metode lain yang spesifik untuk Customer (jika
 
-    @Override
-    public String getRole() {
-        return "user";
-    }
+//    @Override
+//    public String getRole() {
+//        return "user";
+//    }
+
+//    @Override
+//    public String getRole(String role) {
+//        return "user";
+//    }
+
+   
 }
 

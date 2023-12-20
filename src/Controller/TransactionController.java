@@ -15,7 +15,6 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import martmain.Purchase;
-import martmain.Transaksi;
 import martmain.UserPanel;
 
 /**
@@ -62,7 +61,7 @@ public class TransactionController {
         
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             // Sesuaikan dengan tipe data yang sesuai
-            statement.setInt(1, prc.currentUser.getid());
+            statement.setInt(1, prc.currentUser.getId());
             statement.setInt(2, trxm.getProductId());
             statement.setInt(3, trxm.getJumlahBeli());
             statement.setInt(4, trxm.getTotalHarga());

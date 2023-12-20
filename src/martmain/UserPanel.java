@@ -361,7 +361,7 @@ public class UserPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_purchaseBtMouseEntered
 
     private void TransactionsBtMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TransactionsBtMouseEntered
-        setCursor(new Cursor(Cursor.HAND_CURSOR));
+        txCtrl.riwayat(currentUser);
     }//GEN-LAST:event_TransactionsBtMouseEntered
 
     private void TransactionsBtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TransactionsBtMouseClicked
