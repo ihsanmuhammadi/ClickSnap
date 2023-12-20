@@ -5,6 +5,8 @@
 package martmain;
 
 import Controller.ProductController;
+import Controller.UserController;
+import Model.Customer;
 import java.awt.Cursor;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -19,6 +21,8 @@ import javax.swing.JTextField;
 public class Products extends javax.swing.JFrame {
 
     private ProductController ctrl;
+    private UserController ctrlUsr;
+    public Customer currentUser;
     
     public Products() {
         initComponents();
@@ -85,7 +89,7 @@ public class Products extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu5 = new javax.swing.JMenu();
 
@@ -350,14 +354,14 @@ public class Products extends javax.swing.JFrame {
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 40, 460, 50));
 
-        jButton1.setFont(new java.awt.Font("SansSerif", 1, 20)); // NOI18N
-        jButton1.setText("<");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnBack.setFont(new java.awt.Font("SansSerif", 1, 20)); // NOI18N
+        btnBack.setText("<");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnBackActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 50, 50));
+        jPanel1.add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 50, 50));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1020, 670));
 
@@ -407,9 +411,9 @@ public class Products extends javax.swing.JFrame {
     detailTxt.setText(detail);
     }//GEN-LAST:event_tableProductMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        ctrlUsr.showUserPanel(currentUser);
+    }//GEN-LAST:event_btnBackActionPerformed
 
     private void cbAvailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAvailActionPerformed
         // TODO add your handling code here:
@@ -459,6 +463,7 @@ public class Products extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnReset;
@@ -466,7 +471,6 @@ public class Products extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbAvail;
     private javax.swing.JTextArea detailTxt;
     private javax.swing.JTextField hargaField;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;

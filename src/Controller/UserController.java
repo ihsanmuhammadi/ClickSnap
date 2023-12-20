@@ -18,9 +18,12 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import martmain.AdminPanel;
 import martmain.Login;
+import martmain.Products;
 import martmain.Purchase;
 import martmain.Riwayat;
 import martmain.SignUp;
+import martmain.TransaksiAdmin;
+import martmain.TransaksiUser;
 import martmain.UserPanel;
 
 /**
@@ -201,17 +204,30 @@ public class UserController {
 
     
     public void showUserPanel(Customer currentUser) {
-        UserPanel up = new UserPanel(currentUser);
-        up.setVisible(true);
-        up.pack();
-        up.setLocationRelativeTo(null);
+        UserPanel upp = new UserPanel(currentUser);
+        upp.setVisible(true);
+        upp.pack();
+        upp.setLocationRelativeTo(null);
     }
     
-    public void riwayat(Customer currentUser) {
-    Riwayat rw = new Riwayat(currentUser);
-    rw.setVisible(true);
-    rw.pack();
-    rw.setLocationRelativeTo(null);
+    public void showTrxUsr(Customer currentUser) {
+    TransaksiUser trxu = new TransaksiUser(currentUser);
+    trxu.setVisible(true);
+    trxu.pack();
+    trxu.setLocationRelativeTo(null);
+    }
+    
+    public void showTrxAdm(Customer currentUser) {
+    TransaksiAdmin trxa = new TransaksiAdmin(currentUser);
+    trxa.setVisible(true);
+    trxa.pack();
+    trxa.setLocationRelativeTo(null);
+    }
+    public void showPrdct() {
+        Products trxa = new Products();
+        trxa.setVisible(true);
+        trxa.pack();
+        trxa.setLocationRelativeTo(null);
     }
     
     public void showAdminPanel() {

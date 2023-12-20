@@ -361,11 +361,11 @@ public class UserPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_purchaseBtMouseEntered
 
     private void TransactionsBtMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TransactionsBtMouseEntered
-        txCtrl.riwayat(currentUser);
+        
     }//GEN-LAST:event_TransactionsBtMouseEntered
 
     private void TransactionsBtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TransactionsBtMouseClicked
-        JOptionPane.showMessageDialog(this, "Next menu is still in progress.", "Notification", JOptionPane.INFORMATION_MESSAGE);
+        txCtrl.showTrxUsr(currentUser);
     }//GEN-LAST:event_TransactionsBtMouseClicked
 
     private void LogoutBtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LogoutBtMouseClicked

@@ -4,6 +4,8 @@
  */
 package martmain;
 
+import Controller.UserController;
+import Model.Customer;
 import java.awt.Cursor;
 import javax.swing.JOptionPane;
 
@@ -12,12 +14,12 @@ import javax.swing.JOptionPane;
  * @author ihsanmiqbal
  */
 public class AdminPanel extends javax.swing.JFrame {
-
-    /**
-     * Creates new form AdminPanel
-     */
+    private UserController ctrl;
+    public Customer currentUser;
+    
     public AdminPanel() {
         initComponents();
+        this.ctrl = new UserController(null, null, null);
     }
 
     /**
@@ -351,7 +353,7 @@ public class AdminPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_ProductsBtMouseEntered
 
     private void ProductsBtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ProductsBtMouseClicked
-        JOptionPane.showMessageDialog(this, "Next menu is still in progress.", "Notification", JOptionPane.INFORMATION_MESSAGE);
+        ctrl.showPrdct();
     }//GEN-LAST:event_ProductsBtMouseClicked
 
     private void TransactionsBtMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TransactionsBtMouseEntered
@@ -359,7 +361,7 @@ public class AdminPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_TransactionsBtMouseEntered
 
     private void TransactionsBtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TransactionsBtMouseClicked
-        JOptionPane.showMessageDialog(this, "Next menu is still in progress.", "Notification", JOptionPane.INFORMATION_MESSAGE);
+        ctrl.showTrxAdm(currentUser);
     }//GEN-LAST:event_TransactionsBtMouseClicked
 
     private void LogoutBtMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LogoutBtMouseEntered

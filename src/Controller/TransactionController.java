@@ -15,6 +15,8 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import martmain.Purchase;
+import martmain.TransaksiAdmin;
+import martmain.TransaksiUser;
 import martmain.UserPanel;
 
 /**
@@ -26,25 +28,102 @@ public class TransactionController {
     private Transactions trxm;
     private Connection connection;
     private UserPanel up;
+    private TransaksiAdmin trxAdm;
+    private TransaksiUser trxUsr;
+    private Customer currentUser;
 //    public Customer currentUser;
     
-    public TransactionController(Purchase prc, UserPanel up) {
+    public TransactionController(Purchase prc, TransaksiAdmin trxAdm, TransaksiUser trxUsr) {
         this.prc = prc;
+        this.trxAdm = trxAdm;
+        this.trxUsr = trxUsr;
         KoneksiDB koneksiDB = new KoneksiDB();
         koneksiDB.bukaKoneksi();
         this.connection = koneksiDB.getConn();
 //        setCurrentUser(currentUser);
     }
+    
+    public void showTxAdm() {
+            DefaultTableModel model = new DefaultTableModel();
+            model.addColumn("No.");
+            model.addColumn("Nama user");
+            model.addColumn("Produk ID");
+            model.addColumn("Tanggal");
+            model.addColumn("Jumlah");
+            model.addColumn("Total Harga");
+
+            try {
+                int no = 1;
+                String name = "SELECT * FROM users";
+//                executeQuery();
+//                String sql = "SELECT * FROM transactions";
+//                String sql = "SELECT * FROM transactions";
+                String sql = "SELECT transactions.*, users.name AS namauser, product.nama as productnama\n" +
+                            "FROM transactions\n" +
+                            "INNER JOIN users ON transactions.userId = users.id\n" +
+                            "INNER JOIN product ON transactions.productId = product.id";
+//                  String sql = "SELECT *\n" +
+
+//                    "FROM transactions\n" +
+//                    "WHERE userId = " + rwyt.currentUser.getId();
+                java.sql.Statement stm = connection.createStatement();
+                java.sql.ResultSet res = stm.executeQuery(sql);
+
+                while (res.next()) {
+                    model.addRow(new Object[]{
+                        no++,                     
+                        res.getString("namauser"),
+//                        name,
+//                        rwyt.currentUser.getName(),
+                        res.getString("productnama"),
+                        res.getTimestamp("date"),
+                        res.getInt("jumlahBeli"),
+                        res.getInt("totalHarga"),
+                    });
+                }
+                trxAdm.getTable().setModel(model);
+            } catch (SQLException e) {
+                System.out.println("Error : " + e.getMessage());
+            }
+}
 
     
-//    public Customer getCurrentUser() {
-//        return currentUser;
-//    }
+ public void shwoTxUsr() {
+            DefaultTableModel model = new DefaultTableModel();
+            model.addColumn("No.");
+            model.addColumn("Nama user");
+            model.addColumn("Produk ID");
+            model.addColumn("Tanggal");
+            model.addColumn("Jumlah");
+            model.addColumn("Total Harga");
 
-    // Method untuk mengatur pengguna yang sedang login
-//    public void setCurrentUser(Customer currentUser) {
-//        this.currentUser = currentUser;
-//    }
+            try {
+                int no = 1;
+//                String sql = "SELECT transactions.*, users.name AS namauser, product.nama as productnama\n" +
+//                            "FROM transactions\n" +
+//                            "INNER JOIN users ON transactions.userId = users.id\n" +
+//                            "INNER JOIN product ON transactions.productId = product.id";
+                  String sql = "SELECT *\n" +
+                    "FROM transactions\n" +
+                    "WHERE userId = " + trxUsr.currentUser.getId();
+                java.sql.Statement stm = connection.createStatement();
+                java.sql.ResultSet res = stm.executeQuery(sql);
+
+                while (res.next()) {
+                    model.addRow(new Object[]{
+                        no++,
+                        trxUsr.currentUser.getId(),
+                        res.getInt("productId"),
+                        res.getTimestamp("date"),
+                        res.getInt("jumlahBeli"),
+                        res.getInt("totalHarga"),
+                    });
+                }
+                trxUsr.getTable().setModel(model);
+            } catch (SQLException e) {
+                System.out.println("Error : " + e.getMessage());
+            }
+}
     
     public void saveTransaction() {
     try {
