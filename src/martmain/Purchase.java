@@ -39,7 +39,7 @@ public class Purchase extends javax.swing.JFrame {
         KoneksiDB koneksiDB = new KoneksiDB();
         koneksiDB.bukaKoneksi();
         koneksiDB.getConn();
-//        trx.tampilkan_data();
+        trx.showAvailPrdk();
     }
     
     public Purchase(Customer currentUser) {
@@ -50,7 +50,7 @@ public class Purchase extends javax.swing.JFrame {
         KoneksiDB koneksiDB = new KoneksiDB();
         koneksiDB.bukaKoneksi();
         koneksiDB.getConn();
-//        trx.tampilkan_data();
+        trx.showAvailPrdk();
     }
     
     public JTextField getId() {

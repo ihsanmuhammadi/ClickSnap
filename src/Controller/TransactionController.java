@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import martmain.Purchase;
@@ -68,6 +69,8 @@ public class TransactionController {
 //                    "WHERE userId = " + rwyt.currentUser.getId();
                 java.sql.Statement stm = connection.createStatement();
                 java.sql.ResultSet res = stm.executeQuery(sql);
+                
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
                 while (res.next()) {
                     model.addRow(new Object[]{
@@ -76,7 +79,7 @@ public class TransactionController {
 //                        name,
 //                        rwyt.currentUser.getName(),
                         res.getString("productnama"),
-                        res.getTimestamp("date"),
+                        dateFormat.format(res.getTimestamp("date")),
                         res.getInt("jumlahBeli"),
                         res.getInt("totalHarga"),
                     });
@@ -89,40 +92,39 @@ public class TransactionController {
 
     
  public void shwoTxUsr() {
-            DefaultTableModel model = new DefaultTableModel();
-            model.addColumn("No.");
-            model.addColumn("Nama user");
-            model.addColumn("Produk ID");
-            model.addColumn("Tanggal");
-            model.addColumn("Jumlah");
-            model.addColumn("Total Harga");
+    DefaultTableModel model = new DefaultTableModel();
+    model.addColumn("No.");
+    model.addColumn("Nama Produk");
+    model.addColumn("Tanggal");
+    model.addColumn("Jumlah");
+    model.addColumn("Total Harga");
 
-            try {
-                int no = 1;
-//                String sql = "SELECT transactions.*, users.name AS namauser, product.nama as productnama\n" +
-//                            "FROM transactions\n" +
-//                            "INNER JOIN users ON transactions.userId = users.id\n" +
-//                            "INNER JOIN product ON transactions.productId = product.id";
-                  String sql = "SELECT *\n" +
-                    "FROM transactions\n" +
-                    "WHERE userId = " + trxUsr.currentUser.getId();
-                java.sql.Statement stm = connection.createStatement();
-                java.sql.ResultSet res = stm.executeQuery(sql);
+    try {
+        int no = 1;
+        String sql = "SELECT transactions.*, users.name AS namauser, product.nama AS productnama\n" +
+            "FROM transactions\n" +
+            "INNER JOIN users ON transactions.userId = users.id\n" +
+            "INNER JOIN product ON transactions.productId = product.id\n" +
+            "WHERE transactions.userId = " + trxUsr.currentUser.getId();
 
-                while (res.next()) {
-                    model.addRow(new Object[]{
-                        no++,
-                        trxUsr.currentUser.getId(),
-                        res.getInt("productId"),
-                        res.getTimestamp("date"),
-                        res.getInt("jumlahBeli"),
-                        res.getInt("totalHarga"),
-                    });
-                }
-                trxUsr.getTable().setModel(model);
-            } catch (SQLException e) {
-                System.out.println("Error : " + e.getMessage());
-            }
+        java.sql.Statement stm = connection.createStatement();
+        java.sql.ResultSet res = stm.executeQuery(sql);
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+        while (res.next()) {
+            model.addRow(new Object[]{
+                no++,
+                res.getString("productnama"),
+                dateFormat.format(res.getTimestamp("date")),
+                res.getInt("jumlahBeli"),
+                res.getInt("totalHarga"),
+            });
+        }
+        trxUsr.getTable().setModel(model);
+    } catch (SQLException e) {
+        System.out.println("Error : " + e.getMessage());
+    }
 }
     
     public void saveTransaction() {
@@ -208,7 +210,7 @@ public class TransactionController {
 //    }
     
     
-    public void tampilkan_data() {
+    public void showAvailPrdk() {
         DefaultTableModel model_prdk = new DefaultTableModel();
         model_prdk.getDataVector().removeAllElements();
         model_prdk.fireTableDataChanged();
