@@ -378,7 +378,7 @@ public class Purchase extends javax.swing.JFrame {
         jPanel9.setPreferredSize(new java.awt.Dimension(210, 210));
 
         jLabel6.setBackground(new java.awt.Color(255, 51, 51));
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Hawa_s_MART-removebg-preview-3.png"))); // NOI18N
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/skm-2.jpg"))); // NOI18N
 
         jLabel7.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         jLabel7.setText("Frisian Flag Kental Manis");
@@ -473,7 +473,7 @@ public class Purchase extends javax.swing.JFrame {
         jPanel11.setBackground(new java.awt.Color(255, 255, 255));
         jPanel11.setPreferredSize(new java.awt.Dimension(210, 210));
 
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Bag.png"))); // NOI18N
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/bumbu.png"))); // NOI18N
 
         jLabel12.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         jLabel12.setText("  Masako Ayam");

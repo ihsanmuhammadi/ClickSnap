@@ -635,7 +635,7 @@
                   <Color blue="33" green="33" red="ff" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/image/Hawa_s_MART-removebg-preview-3.png"/>
+                  <Image iconType="3" name="/image/skm-2.jpg"/>
                 </Property>
               </Properties>
             </Component>
@@ -802,7 +802,7 @@
             <Component class="javax.swing.JLabel" name="jLabel11">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/image/Bag.png"/>
+                  <Image iconType="3" name="/image/bumbu.png"/>
                 </Property>
               </Properties>
             </Component>
