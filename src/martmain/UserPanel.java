@@ -352,6 +352,7 @@ public class UserPanel extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void purchaseBtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_purchaseBtMouseClicked
+        this.dispose();
         txCtrl.showTxPanel(currentUser);
     }//GEN-LAST:event_purchaseBtMouseClicked
 
@@ -364,10 +365,12 @@ public class UserPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_TransactionsBtMouseEntered
 
     private void TransactionsBtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TransactionsBtMouseClicked
+        this.dispose();
         txCtrl.showTrxUsr(currentUser);
     }//GEN-LAST:event_TransactionsBtMouseClicked
 
     private void LogoutBtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LogoutBtMouseClicked
+        this.dispose();
         txCtrl.showLoginPanel();
 //JOptionPane.showMessageDialog(this, "Next menu is still in progress.", "Notification", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_LogoutBtMouseClicked

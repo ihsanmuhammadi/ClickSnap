@@ -812,11 +812,12 @@ public class Purchase extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSimpanActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-
+        this.dispose();
         UserPanel up = new UserPanel(currentUser);
         up.setVisible(true);
         up.pack();
         up.setLocationRelativeTo(null);
+        
         
     }//GEN-LAST:event_btnBackActionPerformed
 

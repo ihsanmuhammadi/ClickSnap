@@ -159,8 +159,8 @@ public class UserController {
 //                    addUser(currentUser);
                     showAdminPanel();
                 } else if ("user".equals(role)) {
-                    JOptionPane.showConfirmDialog(lgn, "Login successful.", "Info",
-                        JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
+//                    JOptionPane.showConfirmDialog(up, "Login successful.", "Info",
+//                        JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
                     Customer currentUser = new Customer(
                         resultSet.getInt("id"),
                         resultSet.getString("name"),
@@ -170,10 +170,6 @@ public class UserController {
                     );
                     addUser(currentUser);
                     
-//                    Purchase prc = new Purchase(currentUser);
-                    
-                    // Di dalam metode login() setelah pengisian currentUser
-                    JOptionPane.showMessageDialog(new JFrame(), "Current User ID: " + currentUser.getId() + "\nCurrent User Name: " + currentUser.getName(), "Info", JOptionPane.INFORMATION_MESSAGE);
 
                     showUserPanel(currentUser);
                     
@@ -211,6 +207,9 @@ public class UserController {
         upp.setVisible(true);
         upp.pack();
         upp.setLocationRelativeTo(null);
+        JOptionPane.showMessageDialog(new JFrame(), "Selamat datang " + currentUser.getName(), "Info", JOptionPane.INFORMATION_MESSAGE);
+//        JOptionPane.showConfirmDialog(up, "Login successful.", "Info",
+//                        JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
     }
     
     public void showTrxUsr(Customer currentUser) {

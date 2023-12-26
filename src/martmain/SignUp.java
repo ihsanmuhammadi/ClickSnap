@@ -230,10 +230,12 @@ public class SignUp extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void RegisterBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterBtActionPerformed
+        this.dispose();
         ctrlUsr.regist();
     }//GEN-LAST:event_RegisterBtActionPerformed
 
     private void LoginBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginBtActionPerformed
+        this.dispose();
         ctrlUsr.showLoginPanel();
     }//GEN-LAST:event_LoginBtActionPerformed
 
