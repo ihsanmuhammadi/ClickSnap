@@ -5,6 +5,7 @@
 package martmain;
 
 import Controller.TransactionController;
+import Controller.UserController;
 import Model.Customer;
 import javax.swing.JTable;
 
@@ -15,6 +16,7 @@ import javax.swing.JTable;
 public class TransaksiAdmin extends javax.swing.JFrame {
 
     private TransactionController trx;
+    private UserController ctrl;
     public Customer currentUser;
     
     public TransaksiAdmin() {
@@ -191,7 +193,7 @@ public class TransaksiAdmin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        ctrl.showAdminPanel();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

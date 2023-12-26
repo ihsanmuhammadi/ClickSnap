@@ -7,9 +7,7 @@ package martmain;
 import Controller.ProductController;
 import Controller.UserController;
 import Model.Customer;
-import java.awt.Cursor;
 import javax.swing.JComboBox;
-import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -412,7 +410,7 @@ public class Products extends javax.swing.JFrame {
     }//GEN-LAST:event_tableProductMouseClicked
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        ctrlUsr.showUserPanel(currentUser);
+        ctrlUsr.showAdminPanel();
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void cbAvailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAvailActionPerformed

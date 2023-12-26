@@ -6,11 +6,9 @@ package Controller;
 
 import DB.KoneksiDB;
 import Model.Customer;
-import Model.Product;
 import Model.Transactions;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;

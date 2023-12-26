@@ -7,8 +7,6 @@ package Controller;
 import DB.KoneksiDB;
 import Model.Admin;
 import Model.Customer;
-import Model.Product;
-import Model.Customer;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,7 +18,6 @@ import martmain.AdminPanel;
 import martmain.Login;
 import martmain.Products;
 import martmain.Purchase;
-import martmain.Riwayat;
 import martmain.SignUp;
 import martmain.TransaksiAdmin;
 import martmain.TransaksiUser;
@@ -201,6 +198,12 @@ public class UserController {
         tx.setLocationRelativeTo(null);
 //        JOptionPane.showMessageDialog(new JFrame(), "Current User ID: " + currentUser.getid() + "\nCurrent User Name: " + currentUser.getName(), "Info", JOptionPane.INFORMATION_MESSAGE);
     }
+     
+//     public void backToUp() {
+//         showUserPanel(currentUser);
+//         Purchase tx = new Purchase();
+//         tx.setVisible(false);
+//     }
 
     
     public void showUserPanel(Customer currentUser) {

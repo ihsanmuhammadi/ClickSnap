@@ -5,8 +5,6 @@
 package martmain;
 
 import Controller.UserController;
-import java.awt.Cursor;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**

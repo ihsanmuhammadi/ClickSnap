@@ -22,20 +22,5 @@ public class Customer extends User {
         super(name);
         this.name = name;
     }
-
-
-    // Metode lain yang spesifik untuk Customer (jika
-
-//    @Override
-//    public String getRole() {
-//        return "user";
-//    }
-
-//    @Override
-//    public String getRole(String role) {
-//        return "user";
-//    }
-
-   
 }
 

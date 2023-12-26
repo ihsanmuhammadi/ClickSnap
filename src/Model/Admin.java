@@ -20,11 +20,5 @@ public class Admin extends User {
         super(name);
         this.name = name;
     }
-
-//     @Override
-//    public String getRole(String role) {
-//        return "admin";
-//    }
-    
 }
 

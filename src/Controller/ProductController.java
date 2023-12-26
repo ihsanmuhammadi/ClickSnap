@@ -6,8 +6,6 @@ package Controller;
 
 import DB.KoneksiDB;
 import Model.Product;
-import Model.Admin;
-import java.awt.List;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

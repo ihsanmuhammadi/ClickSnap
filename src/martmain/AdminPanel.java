@@ -7,7 +7,6 @@ package martmain;
 import Controller.UserController;
 import Model.Customer;
 import java.awt.Cursor;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -369,7 +368,8 @@ public class AdminPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_LogoutBtMouseEntered
 
     private void LogoutBtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LogoutBtMouseClicked
-        JOptionPane.showMessageDialog(this, "Next menu is still in progress.", "Notification", JOptionPane.INFORMATION_MESSAGE);
+      ctrl.showLoginPanel();
+//JOptionPane.showMessageDialog(this, "Next menu is still in progress.", "Notification", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_LogoutBtMouseClicked
 
     /**
