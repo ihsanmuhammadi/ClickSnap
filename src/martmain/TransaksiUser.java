@@ -17,7 +17,7 @@ public class TransaksiUser extends javax.swing.JFrame {
 
     private TransactionController trx;
     public Customer currentUser;
-    private UserController ctrl;
+    
     
     public TransaksiUser() {
         initComponents();
@@ -191,7 +191,10 @@ public class TransaksiUser extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ctrl.showUserPanel(currentUser);
+        UserPanel up = new UserPanel(currentUser);
+        up.setVisible(true);
+        up.pack();
+        up.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
