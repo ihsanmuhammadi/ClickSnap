@@ -17,6 +17,8 @@ public class Transactions {
     private Date date;
     private int jumlahBeli;
     private int totalHarga;
+    private Customer currentUser;
+    private Product prdc;
 
     
     // Getter dan setter
@@ -25,11 +27,25 @@ public class Transactions {
         
     }
 
-    public Transactions(int userId, int productId, int jumlahBeli, int totalHarga) {
-        this.userId = userId;
+    public Transactions(Customer currentUser, int productId, int jumlahBeli, int totalHarga) {
+//        this.userId = userId;
+        this.currentUser = currentUser;
+//        this.prdc = prdc;
         this.productId = productId;
         this.jumlahBeli = jumlahBeli;
         this.totalHarga = totalHarga;
+    }
+
+    public Product getPrdc() {
+        return prdc;
+    }
+
+    public void setPrdc(Product prdc) {
+        this.prdc = prdc;
+    }
+
+    public void setCurrentUser(Customer currentUser) {
+        this.currentUser = currentUser;
     }
     
     public int getId() {
@@ -44,8 +60,8 @@ public class Transactions {
         return userId;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUserId(Customer currentUser) {
+        this.currentUser = currentUser;
     }
 
     public int getProductId() {
@@ -68,16 +84,16 @@ public class Transactions {
         return jumlahBeli;
     }
 
-    public void setJumlahBeli(int jumlahBeli) {
-        this.jumlahBeli = jumlahBeli;
-    }
-
     public int getTotalHarga() {
         return totalHarga;
     }
 
     public void setTotalHarga(int totalHarga) {
         this.totalHarga = totalHarga;
+    }
+
+    public Customer getUser() {
+        return currentUser;
     }
     
 }

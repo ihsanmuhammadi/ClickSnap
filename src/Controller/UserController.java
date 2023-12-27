@@ -34,6 +34,7 @@ public class UserController {
     private Connection conn;
     private Customer currentUser;
     private UserPanel up;
+    private AdminPanel ap;
     
     protected final ArrayList<Customer> userList = new ArrayList<>();
    
@@ -158,6 +159,7 @@ public class UserController {
                     );
 //                    addUser(currentUser);
                     showAdminPanel();
+                    up.dispose();
                 } else if ("user".equals(role)) {
 //                    JOptionPane.showConfirmDialog(up, "Login successful.", "Info",
 //                        JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
@@ -168,10 +170,11 @@ public class UserController {
                         resultSet.getString("password"),
                         resultSet.getString("noHp")
                     );
-                    addUser(currentUser);
+                    addUser(currentUser);  
                     
 
                     showUserPanel(currentUser);
+                    up.dispose();
                     
                 } else {
                     JOptionPane.showConfirmDialog(lgn, "Invalid role.", "Error",

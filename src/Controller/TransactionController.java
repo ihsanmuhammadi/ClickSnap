@@ -127,22 +127,23 @@ public class TransactionController {
     
     public void saveTransaction() {
     try {
-        int userId = 0;
+//        int userId = prc.currentUser.getId();
         int productId = Integer.parseInt(prc.getId().getText());
         int jumlahBeli = Integer.parseInt(prc.getJml().getText());
         int totalHarga = Integer.parseInt(prc.getTotal().getText());
         
+        
         // Gantilah nilai parameter pada konstruktor sesuai dengan urutan yang benar
-        trxm = new Transactions(userId, productId, jumlahBeli, totalHarga);
+        trxm = new Transactions(null, productId, jumlahBeli, totalHarga);
+        trxm.setCurrentUser(prc.currentUser);
 
         String sql = "INSERT INTO transactions (userId, productId, jumlahBeli, totalHarga) VALUES (?, ?, ?, ?)";
-//        String sql = "INSERT INTO transak (user_id, product_id, jumlah_beli, total_harga) VALUES (?, ?, ?, ?)";
         
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            // Sesuaikan dengan tipe data yang sesuai
-            statement.setInt(1, prc.currentUser.getId());
+            statement.setInt(1, trxm.getUser().getId());
             statement.setInt(2, trxm.getProductId());
-            statement.setInt(3, trxm.getJumlahBeli());
+//            statement.setInt(3, trxm.getJumlahBeli());
+            statement.setInt(3, jumlahBeli);
             statement.setInt(4, trxm.getTotalHarga());
 
             int rowsInserted = statement.executeUpdate();

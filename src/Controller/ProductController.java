@@ -49,6 +49,12 @@ public void simpan() {
         Integer.parseInt(prdkf.getHarga().getText()),
         prdkf.getDetail().getText()
     );
+    
+    // Pemeriksaan keberadaan nama produk sebelum menyimpan
+    if (cekNamaProduk(prdkm.getNama())) {
+        JOptionPane.showMessageDialog(prdkf, "Nama produk sudah ada.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
 
     String sql = "INSERT INTO product (nama, stok, harga, detail) VALUES (?, ?, ?, ?)";
 
@@ -174,6 +180,23 @@ public void delete() {
     } catch (SQLException e) {
         System.out.println("Error : " + e.getMessage());
     }
+}
+    
+    // Metode untuk memeriksa keberadaan nama produk di database
+private boolean cekNamaProduk(String namaProduk) {
+    String sql = "SELECT COUNT(*) FROM product WHERE nama = ?";
+    try (PreparedStatement statement = connection.prepareStatement(sql)) {
+        statement.setString(1, namaProduk);
+        try (ResultSet resultSet = statement.executeQuery()) {
+            if (resultSet.next()) {
+                int count = resultSet.getInt(1);
+                return count > 0;
+            }
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return false;
 }
 
     

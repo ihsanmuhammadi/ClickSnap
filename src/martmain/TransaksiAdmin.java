@@ -193,7 +193,11 @@ public class TransaksiAdmin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ctrl.showAdminPanel();
+        this.dispose();
+        AdminPanel ap = new AdminPanel();
+        ap.setVisible(true);
+        ap.pack();
+        ap.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

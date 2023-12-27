@@ -105,12 +105,12 @@ public class AdminPanel extends javax.swing.JFrame {
                 .addGroup(TransactionsBtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel11)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
         TransactionsBtLayout.setVerticalGroup(
             TransactionsBtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TransactionsBtLayout.createSequentialGroup()
-                .addContainerGap(23, Short.MAX_VALUE)
+                .addContainerGap(21, Short.MAX_VALUE)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel11)
@@ -190,7 +190,7 @@ public class AdminPanel extends javax.swing.JFrame {
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel6)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
@@ -254,7 +254,7 @@ public class AdminPanel extends javax.swing.JFrame {
                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel12)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
@@ -303,9 +303,9 @@ public class AdminPanel extends javax.swing.JFrame {
                 .addComponent(TransactionsBt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(85, 85, 85)
                 .addComponent(LogoutBt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(115, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(48, Short.MAX_VALUE)
+                .addContainerGap(185, Short.MAX_VALUE)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(128, 128, 128))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -352,6 +352,7 @@ public class AdminPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_ProductsBtMouseEntered
 
     private void ProductsBtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ProductsBtMouseClicked
+        this.dispose();
         ctrl.showPrdct();
     }//GEN-LAST:event_ProductsBtMouseClicked
 
@@ -360,6 +361,7 @@ public class AdminPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_TransactionsBtMouseEntered
 
     private void TransactionsBtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TransactionsBtMouseClicked
+        this.dispose();
         ctrl.showTrxAdm(currentUser);
     }//GEN-LAST:event_TransactionsBtMouseClicked
 
@@ -368,7 +370,8 @@ public class AdminPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_LogoutBtMouseEntered
 
     private void LogoutBtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LogoutBtMouseClicked
-      ctrl.showLoginPanel();
+        this.dispose();
+        ctrl.showLoginPanel();
 //JOptionPane.showMessageDialog(this, "Next menu is still in progress.", "Notification", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_LogoutBtMouseClicked
 

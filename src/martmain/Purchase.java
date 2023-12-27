@@ -48,7 +48,7 @@ public class Purchase extends javax.swing.JFrame {
         return labelId;
     }
     public JTextField getJml() {
-        return totalField;
+        return jumlahField; 
     }
     public JTextField getTotal() {
         return totalField;

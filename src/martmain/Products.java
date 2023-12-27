@@ -6,6 +6,7 @@ package martmain;
 
 import Controller.ProductController;
 import Controller.UserController;
+import Model.Admin;
 import Model.Customer;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
@@ -20,7 +21,7 @@ public class Products extends javax.swing.JFrame {
 
     private ProductController ctrl;
     private UserController ctrlUsr;
-    public Customer currentUser;
+    public Admin currentUser;
     
     public Products() {
         initComponents();
@@ -410,7 +411,11 @@ public class Products extends javax.swing.JFrame {
     }//GEN-LAST:event_tableProductMouseClicked
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        ctrlUsr.showAdminPanel();
+        this.dispose();
+        AdminPanel ap = new AdminPanel();
+        ap.setVisible(true);
+        ap.pack();
+        ap.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void cbAvailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAvailActionPerformed
