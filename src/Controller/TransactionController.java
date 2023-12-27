@@ -10,6 +10,7 @@ import Model.Transactions;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -69,6 +70,8 @@ public class TransactionController {
                 java.sql.ResultSet res = stm.executeQuery(sql);
                 
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                NumberFormat currencyFormat = NumberFormat.getNumberInstance();
+                currencyFormat.setMinimumFractionDigits(0);
 
                 while (res.next()) {
                     model.addRow(new Object[]{
@@ -79,7 +82,7 @@ public class TransactionController {
                         res.getString("productnama"),
                         dateFormat.format(res.getTimestamp("date")),
                         res.getInt("jumlahBeli"),
-                        res.getInt("totalHarga"),
+                         "Rp " + currencyFormat.format(res.getInt("totalHarga")),
                     });
                 }
                 trxAdm.getTable().setModel(model);
@@ -110,13 +113,16 @@ public class TransactionController {
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
+        NumberFormat currencyFormat = NumberFormat.getNumberInstance();
+        currencyFormat.setMinimumFractionDigits(0);
+
         while (res.next()) {
             model.addRow(new Object[]{
                 no++,
                 res.getString("productnama"),
                 dateFormat.format(res.getTimestamp("date")),
                 res.getInt("jumlahBeli"),
-                res.getInt("totalHarga"),
+                 "Rp " + currencyFormat.format(res.getInt("totalHarga")),
             });
         }
         trxUsr.getTable().setModel(model);
