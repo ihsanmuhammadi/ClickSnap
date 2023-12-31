@@ -24,7 +24,7 @@ public class Purchase extends javax.swing.JFrame {
      * Creates new form Purchase
      */
     public Purchase() {
-         initComponents();
+        initComponents();
         labelId.setVisible(false);
         trx = new TransactionController(this, null, null);
         KoneksiDB koneksiDB = new KoneksiDB();
@@ -35,7 +35,7 @@ public class Purchase extends javax.swing.JFrame {
     
     public Purchase(Customer currentUser) {
         this.currentUser = currentUser;
-         initComponents();
+        initComponents();
         labelId.setVisible(false);
         trx = new TransactionController(this, null ,null);
         KoneksiDB koneksiDB = new KoneksiDB();
@@ -166,11 +166,6 @@ public class Purchase extends javax.swing.JFrame {
 
         totalField.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         totalField.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
-        totalField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                totalFieldActionPerformed(evt);
-            }
-        });
 
         jLabel8.setFont(new java.awt.Font("SansSerif", 0, 13)); // NOI18N
         jLabel8.setText("Name");
@@ -196,19 +191,9 @@ public class Purchase extends javax.swing.JFrame {
 
         harga.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         harga.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
-        harga.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                hargaActionPerformed(evt);
-            }
-        });
 
         jumlahField.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         jumlahField.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
-        jumlahField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jumlahFieldActionPerformed(evt);
-            }
-        });
         jumlahField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jumlahFieldKeyReleased(evt);
@@ -225,11 +210,6 @@ public class Purchase extends javax.swing.JFrame {
         jLabel37.setText("Total");
 
         labelId.setText("id prdk");
-        labelId.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                labelIdActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -803,10 +783,6 @@ public class Purchase extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void totalFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_totalFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_totalFieldActionPerformed
-
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
         trx.saveTransaction();
     }//GEN-LAST:event_btnSimpanActionPerformed
@@ -821,32 +797,19 @@ public class Purchase extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnBackActionPerformed
 
-    private void hargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hargaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_hargaActionPerformed
-
-    private void jumlahFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jumlahFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jumlahFieldActionPerformed
-
-    private void labelIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_labelIdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_labelIdActionPerformed
-
     private void cbProdukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbProdukActionPerformed
         trx.isiHargaDANid();
     }//GEN-LAST:event_cbProdukActionPerformed
 
     private void jumlahFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jumlahFieldKeyReleased
-    Double harga_prdk = Double.parseDouble(harga.getText());
-    Double jml_beli = Double.parseDouble(jumlahField.getText());
-    Double total = harga_prdk * jml_beli;
-    
-    // Mengonversi nilai total menjadi int
-    int totalInt = total.intValue();
-    
-    totalField.setText(String.valueOf(totalInt));
-//    totalField1.setText(String.valueOf(currentUser.geti
+        Double harga_prdk = Double.parseDouble(harga.getText());
+        Double jml_beli = Double.parseDouble(jumlahField.getText());
+        Double total = harga_prdk * jml_beli;
+
+        // Mengonversi nilai total menjadi int
+        int totalInt = total.intValue();
+
+        totalField.setText(String.valueOf(totalInt));
     }//GEN-LAST:event_jumlahFieldKeyReleased
 
     /**

@@ -8,7 +8,6 @@ package Model;
  *
  * @author achma
  */
-// Admin.java (kelas anak)
 public class Admin extends User {
 
     // Konstruktor

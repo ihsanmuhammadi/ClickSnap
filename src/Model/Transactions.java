@@ -28,9 +28,7 @@ public class Transactions {
     }
 
     public Transactions(Customer currentUser, int productId, int jumlahBeli, int totalHarga) {
-//        this.userId = userId;
         this.currentUser = currentUser;
-//        this.prdc = prdc;
         this.productId = productId;
         this.jumlahBeli = jumlahBeli;
         this.totalHarga = totalHarga;

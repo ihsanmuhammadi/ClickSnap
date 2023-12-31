@@ -108,12 +108,12 @@ public class UserPanel extends javax.swing.JFrame {
                 .addGroup(TransactionsBtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel11)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
         TransactionsBtLayout.setVerticalGroup(
             TransactionsBtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TransactionsBtLayout.createSequentialGroup()
-                .addContainerGap(23, Short.MAX_VALUE)
+                .addContainerGap(21, Short.MAX_VALUE)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel11)
@@ -193,7 +193,7 @@ public class UserPanel extends javax.swing.JFrame {
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel6)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
@@ -257,7 +257,7 @@ public class UserPanel extends javax.swing.JFrame {
                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel12)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
@@ -360,10 +360,6 @@ public class UserPanel extends javax.swing.JFrame {
         setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_purchaseBtMouseEntered
 
-    private void TransactionsBtMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TransactionsBtMouseEntered
-        
-    }//GEN-LAST:event_TransactionsBtMouseEntered
-
     private void TransactionsBtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TransactionsBtMouseClicked
         this.dispose();
         txCtrl.showTrxUsr(currentUser);
@@ -372,13 +368,15 @@ public class UserPanel extends javax.swing.JFrame {
     private void LogoutBtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LogoutBtMouseClicked
         this.dispose();
         txCtrl.showLoginPanel();
-//JOptionPane.showMessageDialog(this, "Next menu is still in progress.", "Notification", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_LogoutBtMouseClicked
 
     private void LogoutBtMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LogoutBtMouseEntered
         setCursor(new Cursor(Cursor.HAND_CURSOR));
-        
     }//GEN-LAST:event_LogoutBtMouseEntered
+
+    private void TransactionsBtMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TransactionsBtMouseEntered
+        setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_TransactionsBtMouseEntered
 
     /**
      * @param args the command line arguments

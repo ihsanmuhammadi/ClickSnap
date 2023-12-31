@@ -5,7 +5,6 @@
 package martmain;
 
 import Controller.TransactionController;
-import Controller.UserController;
 import Model.Customer;
 import javax.swing.JTable;
 

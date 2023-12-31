@@ -21,8 +21,8 @@ public class User {
     }
     
     public User(String currentUser) {
-            this.name = currentUser;
-        }
+        this.name = currentUser;
+    }
     
     public String getName() {
         return name;
@@ -43,6 +43,4 @@ public class User {
     public String getNoHp() {
         return noHp;
     }
-    
-//    public abstract String getRole(String role);
 }

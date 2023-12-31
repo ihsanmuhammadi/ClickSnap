@@ -7,7 +7,6 @@ package martmain;
 import Controller.ProductController;
 import Controller.UserController;
 import Model.Admin;
-import Model.Customer;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
@@ -34,8 +33,8 @@ public class Products extends javax.swing.JFrame {
     }
     
     public JComboBox getStok() {
-    return cbAvail; // Langsung mengembalikan JComboBox
-}
+        return cbAvail; // Langsung mengembalikan JComboBox
+    }
     
     public JTextField getHarga() {
         return hargaField;
@@ -154,19 +153,9 @@ public class Products extends javax.swing.JFrame {
 
         hargaField.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         hargaField.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
-        hargaField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                hargaFieldActionPerformed(evt);
-            }
-        });
 
         nameField.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         nameField.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
-        nameField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nameFieldActionPerformed(evt);
-            }
-        });
 
         jLabel8.setFont(new java.awt.Font("SansSerif", 0, 13)); // NOI18N
         jLabel8.setText("Name");
@@ -209,11 +198,6 @@ public class Products extends javax.swing.JFrame {
         jScrollPane2.setViewportView(detailTxt);
 
         cbAvail.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tersedia", "Kosong" }));
-        cbAvail.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbAvailActionPerformed(evt);
-            }
-        });
 
         jLabel13.setFont(new java.awt.Font("SansSerif", 0, 13)); // NOI18N
         jLabel13.setText("Availability");
@@ -241,33 +225,32 @@ public class Products extends javax.swing.JFrame {
                         .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnSimpan, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel11)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addGap(4, 4, 4)
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel11)
+                                        .addComponent(jLabel8))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                            .addComponent(jLabel2)
+                                            .addGap(100, 100, 100))
+                                        .addComponent(hargaField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(nameField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jPanel2Layout.createSequentialGroup()
                                     .addComponent(jLabel12)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jLabel8)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                                .addGap(10, 10, 10)
-                                                .addComponent(jLabel2))))))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(hargaField, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jLabel13)
-                                        .addGap(27, 27, 27)
-                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(cbAvail, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE))))))
-                        .addGap(1, 1, 1)))
-                .addGap(0, 80, Short.MAX_VALUE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addContainerGap(36, Short.MAX_VALUE)
+                            .addComponent(jLabel13)
+                            .addGap(27, 27, 27)
+                            .addComponent(cbAvail, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(0, 59, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -278,18 +261,19 @@ public class Products extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(hargaField, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(94, 94, 94)
+                        .addComponent(jLabel12)
+                        .addGap(47, 47, 47))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addComponent(jLabel12)))
-                .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(hargaField, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbAvail, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
                     .addComponent(jLabel13))
@@ -373,14 +357,6 @@ public class Products extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void hargaFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hargaFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_hargaFieldActionPerformed
-
-    private void nameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nameFieldActionPerformed
-
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
         ctrl.simpan();
     }//GEN-LAST:event_btnSimpanActionPerformed
@@ -395,19 +371,19 @@ public class Products extends javax.swing.JFrame {
 
     private void tableProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableProductMouseClicked
         // Mendapatkan baris yang dipilih pada tabel
-    int row = tableProduct.getSelectedRow();
+        int row = tableProduct.getSelectedRow();
 
-    // Mendapatkan nilai dari setiap kolom pada baris yang dipilih
-    String name = tableProduct.getModel().getValueAt(row, 1).toString();
-    String stok = tableProduct.getModel().getValueAt(row, 2).toString();
-    String harga = tableProduct.getModel().getValueAt(row, 3).toString();
-    String detail = tableProduct.getModel().getValueAt(row, 4).toString();
+        // Mendapatkan nilai dari setiap kolom pada baris yang dipilih
+        String name = tableProduct.getModel().getValueAt(row, 1).toString();
+        String stok = tableProduct.getModel().getValueAt(row, 2).toString();
+        String harga = tableProduct.getModel().getValueAt(row, 3).toString();
+        String detail = tableProduct.getModel().getValueAt(row, 4).toString();
 
-    // Mengisi nilai ke dalam field pada form
-    nameField.setText(name);
-    cbAvail.setSelectedItem(this);
-    hargaField.setText(harga);
-    detailTxt.setText(detail);
+        // Mengisi nilai ke dalam field pada form
+        nameField.setText(name);
+        cbAvail.setSelectedItem(this);
+        hargaField.setText(harga);
+        detailTxt.setText(detail);
     }//GEN-LAST:event_tableProductMouseClicked
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -417,10 +393,6 @@ public class Products extends javax.swing.JFrame {
         ap.pack();
         ap.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnBackActionPerformed
-
-    private void cbAvailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAvailActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbAvailActionPerformed
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
         ctrl.reset();
@@ -504,14 +476,3 @@ public class Products extends javax.swing.JFrame {
     private javax.swing.JTable tableProduct;
     // End of variables declaration//GEN-END:variables
 }
-
-
-
-//    public JTextField getDetail() {
-//        return detailField;
-//    }
-//    
-    
-    //    public JTextField getStok() {
-//        return stokField;
-//    }

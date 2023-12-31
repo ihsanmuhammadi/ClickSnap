@@ -10,9 +10,7 @@ package Model;
  */
 // Customer.java (kelas anak)
 public class Customer extends User {
-//    private String role;
-    private String alamat;
-
+    
     // Konstruktor
     public Customer(int id, String name, String email, String password, String noHp) {
         super(id, name, email, password, noHp);

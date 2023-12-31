@@ -20,7 +20,6 @@ public class AdminPanel extends javax.swing.JFrame {
         initComponents();
         this.ctrl = new UserController(null, null, null);
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -372,7 +371,6 @@ public class AdminPanel extends javax.swing.JFrame {
     private void LogoutBtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LogoutBtMouseClicked
         this.dispose();
         ctrl.showLoginPanel();
-//JOptionPane.showMessageDialog(this, "Next menu is still in progress.", "Notification", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_LogoutBtMouseClicked
 
     /**
